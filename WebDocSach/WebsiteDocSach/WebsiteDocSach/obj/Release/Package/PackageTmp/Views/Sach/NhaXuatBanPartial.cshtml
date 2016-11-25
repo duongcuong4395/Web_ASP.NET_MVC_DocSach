@@ -1,0 +1,17 @@
+﻿<div class="branch leftbar">
+    <h3 class="title" id="NHAXUATBAN">
+        NHÀ XUẤT BẢN
+    </h3>
+    <ul>
+        @foreach (var item in Model)
+        {
+            @**@
+            <li>
+                <a href="@Url.Action("SachTheoNXB", new { @idnxb = item.idnxb })">Nhà xuất bản: @item.tennxb </a>
+                <span class="badge badge-info">
+                    @item.SL
+                </span>
+            </li>
+        } 
+    </ul>
+</div>

@@ -1,0 +1,15 @@
+﻿
+<div class="category leftbar">
+    <h3 class="title" id="CHUDE"> Chủ đề </h3>
+    <ul>
+        @foreach (var item in Model)
+        {
+            @**@
+            <li> <a href="@Url.Action("SachTheoTheLoai", "Sach", new { @idchude = item.idchude })">@item.tenchude </a> 
+                <span class="badge badge-info">
+                    @item.SL
+                </span>
+            </li> 
+        } 
+    </ul>
+</div>

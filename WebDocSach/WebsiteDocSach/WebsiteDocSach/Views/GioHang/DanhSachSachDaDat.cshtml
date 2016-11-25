@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Sách đã đặt.";
+    Layout = "~/Views/Layout/LayoutNguoiDung.cshtml";
+}
+
+<div class="row">
+    <h2 style="text-align:center; color: red;">Danh sách sản phẩm yêu thích</h2>
+    <h2 class="title text-center">@ViewBag.ThongBao</h2>
+    <br />
+    @{
+        int dem = 0;
+    }
+    @foreach (var item in Model)
+    {
+        dem++;
+        <div class="col-md-3 col-sm-6">
+            <div class="products">
+
+                @if (item.GiaMoi == 0)
+                {
+                    <div class="offer">
+                        <p>FREE</p>
+                    </div>
+                }
+                else if (item.khuyenmai != "0" || item.khuyenmai != null)
+                {
+                    <div class="offer">
+                        <p>- @item.khuyenmai %</p>
+                    </div>
+                }
+                else
+                {
+                    <div></div>
+                }
+                <div class="thumbnail">
+                    <a href="@Url.Action("XemChiTiet", "Sach", new { id = item.idsach })">
+                        <img src="~/Images/AnhBia/@item.anhbia" alt="@item.tensach" style="height: 180px; width: 100px">
+                    </a>
+                </div>
+                <div class="productname">@item.tensach</div>
+                <h4 class="price">Giá gốc: @String.Format("{0:0,0}", item.gia) VND </h4>
+                <div class="button_group"> 
+                    @*<a class="button compare" href="@Url.Action("XemChiTiet", "Sach", new { id = item.idsach })"></a>*@ 
+                    <a class="button wishlist" href="@item.linktai" target="_blank" rel=”noopener noreferrer">Tải sách này</a> 
+                </div> 
+            </div>
+        </div>
+        if (dem == 4)
+        {
+            <div class="clearfix"></div>
+            dem = 0;
+        }
+    }
+    <div class="clearfix"></div> 
+</div>
+ 

@@ -1,0 +1,46 @@
+﻿@using BOOKSTORE_ONLINE.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<BOOKSTORE_ONLINE.Models.chude>
+@{
+    ViewBag.Title = "Chude";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3><strong>Topic</strong></h3>
+
+<p>
+    @Html.ActionLink("Create New", "Taomoicd")
+</p>
+<table id="racetimes">
+    <tr id="firstrow">
+        <th style="width:200px; text-align:center">
+            Tên chủ đề
+        </th>
+        <th style="width:200px; text-align:center">
+           
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenchude)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Suacd", new { id = item.idchude }) |
+                @Html.ActionLink("Delete", "Xoacd", new { id = item.idchude })
+            </td>
+        </tr>
+    }
+
+</table>
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+                <div class="MenuTrang">
+                    @Html.PagedListPager(Model, page => Url.Action("Chude", new { page = page }))
+                </div>
+                <style>
+                    .MenuTrang li {
+                        display: inline;
+                    }
+                </style>

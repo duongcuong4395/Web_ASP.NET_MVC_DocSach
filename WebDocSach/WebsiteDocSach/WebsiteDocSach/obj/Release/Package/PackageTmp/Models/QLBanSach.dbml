@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLSachOnline" Class="QLBanSachDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=QLSachOnline;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QLSachOnlineConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.chitietdh" Member="chitietdhs">
+    <Type Name="chitietdh">
+      <Column Name="iddh" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idsach" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="soluong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dongia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="donhang_chitietdh" Member="donhang" ThisKey="iddh" OtherKey="iddh" Type="donhang" IsForeignKey="true" />
+      <Association Name="sach_chitietdh" Member="sach" ThisKey="idsach" OtherKey="idsach" Type="sach" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.thamgia" Member="thamgias">
+    <Type Name="thamgia">
+      <Column Name="idsach" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idtacgia" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="vaitro" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="tacgia_thamgia" Member="tacgia" ThisKey="idtacgia" OtherKey="idtacgia" Type="tacgia" IsForeignKey="true" />
+      <Association Name="sach_thamgia" Member="sach" ThisKey="idsach" OtherKey="idsach" Type="sach" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.chude" Member="chudes">
+    <Type Name="chude">
+      <Column Name="idchude" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tenchude" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="chude_sach" Member="saches" ThisKey="idchude" OtherKey="idchude" Type="sach" />
+    </Type>
+  </Table>
+  <Table Name="dbo.donhang" Member="donhangs">
+    <Type Name="donhang">
+      <Column Name="iddh" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ngaylap" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="idkh" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="hinhthucthanhtoan" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ngaygiaohang" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="tinhtrangthanhtoan" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="tinhtranggiao" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="hotennguoinhan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="diachinguoinhan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="sodienthoainguoinhan" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Association Name="donhang_chitietdh" Member="chitietdhs" ThisKey="iddh" OtherKey="iddh" Type="chitietdh" />
+      <Association Name="khachhang_donhang" Member="khachhang" ThisKey="idkh" OtherKey="idkh" Type="khachhang" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KHDanhGia" Member="KHDanhGias">
+    <Type Name="KHDanhGia">
+      <Column Name="idphanhoi" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idsach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChatLuong" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Association Name="sach_KHDanhGia" Member="sach" ThisKey="idsach" OtherKey="idsach" Type="sach" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.lienhe" Member="lienhes">
+    <Type Name="lienhe">
+      <Column Name="malienhe" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tenshop" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="sdt" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.loaikhachhang" Member="loaikhachhangs">
+    <Type Name="loaikhachhang">
+      <Column Name="idLoaiKH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenLoaiKH" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="loaikhachhang_khachhang" Member="khachhangs" ThisKey="idLoaiKH" OtherKey="idLoaiKH" Type="khachhang" />
+    </Type>
+  </Table>
+  <Table Name="dbo.nxb" Member="nxbs">
+    <Type Name="nxb">
+      <Column Name="idnxb" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tennxb" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="nxb_sach" Member="saches" ThisKey="idnxb" OtherKey="idnxb" Type="sach" />
+    </Type>
+  </Table>
+  <Table Name="dbo.phanquyen" Member="phanquyens">
+    <Type Name="phanquyen">
+      <Column Name="idQuyen" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenQuyen" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="phanquyen_khachhang" Member="khachhangs" ThisKey="idQuyen" OtherKey="idQuyen" Type="khachhang" />
+      <Association Name="phanquyen_QuanTri" Member="QuanTris" ThisKey="idQuyen" OtherKey="idQuyen" Type="QuanTri" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tacgia" Member="tacgias">
+    <Type Name="tacgia">
+      <Column Name="idtacgia" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="hotentg" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="tieusu" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="tacgia_thamgia" Member="thamgias" ThisKey="idtacgia" OtherKey="idtacgia" Type="thamgia" />
+    </Type>
+  </Table>
+  <Table Name="dbo.khachhang" Member="khachhangs">
+    <Type Name="khachhang">
+      <Column Name="idkh" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="hotenkh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="taikhoan" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="diachi" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="dienthoaikh" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="gioitinh" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="ngaysinh" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="idQuyen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idLoaiKH" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="maKHRieng" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="khachhang_donhang" Member="donhangs" ThisKey="idkh" OtherKey="idkh" Type="donhang" />
+      <Association Name="khachhang_DSSachYeuThich" Member="DSSachYeuThiches" ThisKey="idkh" OtherKey="idkh" Type="DSSachYeuThich" />
+      <Association Name="loaikhachhang_khachhang" Member="loaikhachhang" ThisKey="idLoaiKH" OtherKey="idLoaiKH" Type="loaikhachhang" IsForeignKey="true" />
+      <Association Name="phanquyen_khachhang" Member="phanquyen" ThisKey="idQuyen" OtherKey="idQuyen" Type="phanquyen" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DSSachYeuThich" Member="DSSachYeuThiches">
+    <Type Name="DSSachYeuThich">
+      <Column Name="idkh" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idsach" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="khachhang_DSSachYeuThich" Member="khachhang" ThisKey="idkh" OtherKey="idkh" Type="khachhang" IsForeignKey="true" />
+      <Association Name="sach_DSSachYeuThich" Member="sach" ThisKey="idsach" OtherKey="idsach" Type="sach" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuanTri" Member="QuanTris">
+    <Type Name="QuanTri">
+      <Column Name="idadmin" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="idQuyen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="hinhanh" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="phanquyen_QuanTri" Member="phanquyen" ThisKey="idQuyen" OtherKey="idQuyen" Type="phanquyen" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NguoiXem" Member="NguoiXems">
+    <Type Name="NguoiXem">
+      <Column Name="idnguoixem" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SoNguoiXem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayXem" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sach" Member="saches">
+    <Type Name="sach">
+      <Column Name="idsach" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tensach" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="gia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="khuyenmai" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="mota" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="anhbia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ngaycapnhat" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="noidung" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="linktai" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="idnxb" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idchude" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GiaMoi" Type="System.Decimal" DbType="Decimal(38,6)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LinkThanhToan" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Association Name="sach_chitietdh" Member="chitietdhs" ThisKey="idsach" OtherKey="idsach" Type="chitietdh" />
+      <Association Name="sach_thamgia" Member="thamgias" ThisKey="idsach" OtherKey="idsach" Type="thamgia" />
+      <Association Name="sach_KHDanhGia" Member="KHDanhGias" ThisKey="idsach" OtherKey="idsach" Type="KHDanhGia" />
+      <Association Name="sach_DSSachYeuThich" Member="DSSachYeuThiches" ThisKey="idsach" OtherKey="idsach" Type="DSSachYeuThich" />
+      <Association Name="chude_sach" Member="chude" ThisKey="idchude" OtherKey="idchude" Type="chude" IsForeignKey="true" />
+      <Association Name="nxb_sach" Member="nxb" ThisKey="idnxb" OtherKey="idnxb" Type="nxb" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sachTheoNhaXuatBan" Method="sachTheoNhaXuatBan">
+    <ElementType Name="sachTheoNhaXuatBanResult">
+      <Column Name="idnxb" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tennxb" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sachTheoTheLoai" Method="sachTheoTheLoai">
+    <ElementType Name="sachTheoTheLoaiResult">
+      <Column Name="idchude" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tenchude" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sachTheoTacGia" Method="sachTheoTacGia">
+    <ElementType Name="sachTheoTacGiaResult">
+      <Column Name="idtacgia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="hotentg" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.tacGiaNXBTheoSach" Method="tacGiaNXBTheoSach">
+    <Parameter Name="idsach" Type="System.Int32" DbType="Int" />
+    <ElementType Name="tacGiaNXBTheoSachResult">
+      <Column Name="hotentg" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="tenchude" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="tennxb" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="idsach" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tensach" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="gia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="khuyenmai" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="anhbia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GiaMoi" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="linktai" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="mota" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="noidung" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ngaycapnhat" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TenKHSLThich" Method="TenKHSLThich">
+    <ElementType Name="TenKHSLThichResult">
+      <Column Name="hotenkh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.NgayXemSoNguoiXem" Method="NgayXemSoNguoiXem">
+    <ElementType Name="NgayXemSoNguoiXemResult">
+      <Column Name="ngay" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoNguoiXem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TenSachLinkTaiTheoDonHang" Method="TenSachLinkTaiTheoDonHang">
+    <Parameter Name="maskhachhang" Type="System.Int32" DbType="Int" />
+    <ElementType Name="TenSachLinkTaiTheoDonHangResult">
+      <Column Name="tensach" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="linktai" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="idsach" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="gia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="khuyenmai" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="ngaycapnhat" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="LinkThanhToan" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="anhbia" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GiaMoi" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="SoLuongSach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

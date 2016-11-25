@@ -1,0 +1,204 @@
+﻿ 
+
+
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Layout/LayoutNguoiDung.cshtml";
+}
+
+@section XemChiTiet {  
+
+    
+
+    <h2 style="text-align: center;">@ViewBag.thongbaothem</h2>
+     @foreach(var item in Model)
+     {
+    <div class="products-details"> 
+        <div class="preview_image">
+            <div class="preview-small">
+                <div style="height:400px;width:328px;" class="zoomWrapper">
+                    <img class="img-responsive" id="zoom_03" src="~/Images/AnhBia/@item.anhbia" data-zoom-image="~/Images/AnhBia/@item.anhbia" alt="" style=" position: absolute; height: 100%; width:initial; margin-left:10%;">
+                </div>
+            </div> 
+        </div>
+        <div class="products-description">
+            <h5 class="name">
+                @item.tensach
+            </h5>  
+            <!--Hiện thông tin thể loại nhà xuất bản tác giả-->
+            <p>
+                <text style="font-weight:bold">Tác giả:</text> 
+                <span class=" light-red">
+                    @item.hotentg
+                </span>
+            </p>
+            <p>
+                <text style="font-weight:bold">Thể loại:</text>
+                <span class=" light-red">
+                    @item.tenchude
+                </span>
+            </p>
+            <p>
+                <text style="font-weight:bold">Nhà xuất bản:</text>
+                <span class=" light-red">
+                    @item.tennxb
+                </span>
+            </p>
+            <p style="font-size:16px;">
+                @item.tieusu
+            </p>
+            <hr class="border">
+            <div class="price">
+                <text style="font-size:19px; font-weight:bold;">Giá  :</text> 
+                @if (item.khuyenmai == "0")
+                {
+                    <span class="new_price"> @String.Format("{0:0,0}", item.gia) <sup> VNĐ </sup> </span>
+                }
+                else
+                {
+                    <span class="new_price"> @String.Format("{0:0,0}", item.GiaMoi) <sup> VNĐ </sup> </span>
+                    <span class="old_price"> @String.Format("{0:0,0}", item.gia) <sup> VNĐ </sup> </span>
+                } 
+            </div>
+            <hr class="border">
+            <div class="wided">           
+                
+                <div class="button_group"> 
+                    <div class="fb-like" data-href="http://websitedocsach.azurewebsites.net/Sach/XemChiTiet/@item.idsach" data-width="300" data-layout="standard" data-action="like" data-size="large" data-show-faces="fale" data-share="true"></div>
+                    <div class="clearfix">
+                    </div> 
+                    @if (item.khuyenmai == "100")
+                    {
+                        <a class="button compare"  href="@item.linktai">
+                            <img src="~/Images/Icon/Button-Download-icon.png" />
+                            Tải về</a>
+                    }
+                    else
+                    {
+                        <a class="button compare" href="@Url.Action("ThemGioHang", "GioHang", new { @sidsach = @item.idsach, @strURL = Request.Url.ToString() })">THÊM VÀO GIỎ HÀNG</a>
+                    } 
+                    <a class="button favorite" href="@Url.Action("ThemSPYeuThich", "SachStore", new { idsach = @item.idsach, @strURL = Request.Url.ToString() })" data-toggle="tooltip" data-placement="bottom" title="Thêm và danh sách thích  !">
+                        <i class="fa fa-heart-o"> </i>
+                    </a>   
+                </div>          
+            </div>
+            <div class="clearfix">
+            </div> 
+        </div>
+    </div> 
+    <div class="clearfix">
+    </div>
+    <div class="tab-box"> 
+        <div id="tabchitiet"> 
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                <li><a href="#NoiDung" data-toggle="tab">Nội dung</a></li>
+                <li><a href=".PhanHoi" data-toggle="tab">Phản hồi</a></li>
+                <li><a href="#BinhLuan" data-toggle="tab">Bình luận</a></li>
+            </ul>
+        </div>
+        <div class="tab-content" >
+            <div class="tab-pane active" id="home">áygidaygsdasd</div>
+            <div class="tab-pane" id="NoiDung">
+                <p style="font-size: 16px;">
+                    @item.mota .
+                </p>
+                @if (item.khuyenmai == "100")
+                {
+                    <p>
+                        <iframe frameborder="1" src="@item.noidung/preview" style="height: 700px; width: 700px;"></iframe>
+                    </p>
+                }
+                else
+                {
+                    <p style="color: red; font-size: 18px;">Để có thể xem típ bạn vui lòng trả phí <a href="@Url.Action("ThemGioHang", "GioHang", new { @sidsach = @item.idsach, @strURL = Request.Url.ToString() })" style="color:blue;">tại đây</a>.</p>
+                }
+            </div>
+            <div class="tab-pane PhanHoi" id="Reviews"> 
+                <h2 style="text-align: center; font-size: 16px; font-weight:bold;">@ViewBag.thongBaoloi</h2> 
+                @using (Html.BeginForm("DanhGiaKhachHang", "Sach", FormMethod.Post ))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)   
+                    <form>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        &nbsp;
+                                    </th>
+                                    <th>
+                                        1 sao
+                                    </th>
+                                    <th>
+                                        2 sao
+                                    </th>
+                                    <th>
+                                        3 sao
+                                    </th>
+                                    <th>
+                                        4 sao
+                                    </th>
+                                    <th>
+                                        5 sao
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Chất lượng sách
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="ChatLuong" value="1 sao">
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="ChatLuong" value="2 sao">
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="ChatLuong" value="3 sao">
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="ChatLuong" value="4 sao">
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="ChatLuong" value="5 sao">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-row">
+                                    <label class="lebel-abs">
+                                        Cảm nhận của bạn
+                                        <strong class="red">
+                                            *
+                                        </strong>
+                                    </label>
+                                    <textarea class="input textareafild" name="NoiDungDanhGia" rows="7"> </textarea>
+                                </div>
+                                <div class="form-row">
+                                    <input type="submit" value="Gửi đánh giá" class="button">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }  
+            </div>
+            <div class="tab-pane" id="BinhLuan">
+                <div class="fb-comments" data-href="http://websitedocsach.azurewebsites.net/Sach/XemChiTiet/@item.idsach" data-numposts="5" data-width="100%"></div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix">
+    </div>
+   
+    <div class="clearfix">
+    </div>
+     }
+}
+

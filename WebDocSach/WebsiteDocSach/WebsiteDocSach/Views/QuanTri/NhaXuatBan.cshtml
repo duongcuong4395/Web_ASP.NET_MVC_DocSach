@@ -1,0 +1,48 @@
+﻿@using WebsiteDocSach.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<nxb>
+ 
+@{
+    ViewBag.Title = "NhaXuatBan";
+    Layout = "~/Views/Layout/LayoutQuanTri.cshtml";
+}
+
+<h2>NhaXuatBan</h2>
+
+
+<p>
+    @Html.ActionLink("Thêm 1 nhà xuất bản", "ThemNhaXuatBan")
+</p>
+<table id="racetimes">
+    <tr id="firstrow">
+        <th style="width:200px; text-align:center">
+            Tên nhà xuất bản
+        </th>
+        <th style="width:200px; text-align:center">
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tennxb)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "SuaNhaXuatBan", new { id = item.idnxb }) |
+                @Html.ActionLink("Xóa nhà xuất bản", "XoaNhaXuatBan", new { id = item.idnxb })
+            </td>
+        </tr>
+    }
+
+</table>
+             Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+            <div class="MenuTrang">
+                @Html.PagedListPager(Model, page => Url.Action("NhaXuatBan", new { page = page }))
+            </div>
+            <style>
+                .MenuTrang li {
+                    display: inline;
+                }
+            </style>

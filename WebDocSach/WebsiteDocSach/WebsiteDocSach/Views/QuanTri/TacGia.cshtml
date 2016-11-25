@@ -1,0 +1,56 @@
+﻿@using WebsiteDocSach.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<tacgia>
+
+
+@{
+    ViewBag.Title = "TacGia";
+    Layout = "~/Views/Layout/LayoutQuanTri.cshtml";
+}
+
+<h2>TacGia</h2>
+
+
+<p>
+    @Html.ActionLink("Thêm 1 tác giả", "ThemMoiTacGia")
+</p>
+<table id="racetimes">
+    <tr id="firstrow">
+        <th style="width:200px; text-align:center">
+            Tên tác giả
+        </th>
+        <th style="width:200px; text-align:center">
+            Tiểu sử
+        </th>
+        <th style="width:200px; text-align:center">
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.hotentg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tieusu)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa thông tin", "SuaTacGia", new { id = item.idtacgia }) |
+                @Html.ActionLink("Chi tiết", "Chitiettg", new { id = item.idtacgia }) |
+                @Html.ActionLink("Xóa tác giả", "XoaTacGia", new { id = item.idtacgia })
+            </td>
+        </tr>
+    }
+
+</table>
+             Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+            <div class="MenuTrang">
+                @Html.PagedListPager(Model, page => Url.Action("TacGia", new { page = page }))
+            </div>
+            <style>
+                .MenuTrang li {
+                    display: inline;
+                }
+            </style>

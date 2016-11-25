@@ -1,0 +1,76 @@
+﻿@using WebsiteDocSach.Models
+@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<sach>
+ 
+
+@{
+    ViewBag.Title = "Tìm kiếm theo giá sách";
+    Layout = "~/Views/Layout/LayoutNguoiDung.cshtml";
+}
+
+
+
+
+    <h2 style="text-align:center; color: red;">@ViewBag.sanpham</h2> 
+@{
+    int dem = 0;
+}
+@foreach (var item in Model)
+{
+    dem++;
+    <div class="col-md-3 col-sm-6">
+        <div class="products">
+            @{
+    int km = int.Parse(item.khuyenmai);
+            }
+            @if (km == 100)
+            {
+                <div class="offer">FREE</div>
+            }
+            else
+            {
+                <div class="offer">- @km %</div>
+            }
+
+            <div class="thumbnail">
+                <a href="@Url.Action("XemChiTiet", "Sach", new { id = item.idsach })">
+                    <img src="~/Images/AnhBia/@item.anhbia" alt="@item.tensach" style="height: 180px; width: 100px">
+                </a>
+            </div>
+            <div class="productname">@item.tensach</div> 
+                <p class="price">Giá gốc: @String.Format("{0:0,0}", item.gia) VND </p> 
+            <div class="button_group">
+                <div>
+                    <a class="button compare" href="@Url.Action("ThemGioHang", "GioHang", new { @sidsach = @item.idsach, @strURL = Request.Url.ToString() })">
+                        THÊM VÀO GIỎ
+                    </a>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div>
+                    <a class="button wishlist" href="@Url.Action("ThemSPYeuThich", "SachStore", new { idsach = @item.idsach, @strURL = Request.Url.ToString() })">
+                        <i class="fa fa-heart-o">
+                            Thích
+                        </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    if (dem == 4)
+    {
+        <div class="clearfix"></div>
+        dem = 0;
+    }
+}
+<div class="clearfix"></div>
+   @*Tạo liên kết các trang*@
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) Trong tổng số @Model.PageCount Trang;
+@*<div class="MenuTrang">
+
+    </div>*@
+<div class="pager">
+    @Html.PagedListPager(Model, page => Url.Action("TimKiemTheoGiaMoi", "TimKiem", new { page = page, @gianho = ViewBag.gianho, @giaLon = ViewBag.giaLon }))
+</div>
+

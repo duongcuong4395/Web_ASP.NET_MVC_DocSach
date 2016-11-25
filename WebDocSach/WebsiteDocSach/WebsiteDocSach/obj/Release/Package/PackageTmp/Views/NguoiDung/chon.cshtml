@@ -1,0 +1,258 @@
+﻿
+@model WebsiteDocSach.Models.khachhang
+ 
+
+@{
+    ViewBag.Title = "chon";
+    Layout = "~/Views/Layout/LayoutNguoiDung.cshtml";
+}
+ 
+<div class="checkout-page"> 
+    <br />
+    <hr />
+    <h5 style="text-align: center; font-weight:bold; color: red;">@ViewBag.chungchung</h5> 
+    <hr />
+    <br />
+    <ol class="checkout-steps">
+        <!--Đăng ký-->
+        <li class="steps active">
+            <a href="#widget2container" class="panel-heading collapsed step-title"  data-toggle="collapse">01. ĐĂNG KÝ </a>
+            <div class="step-description collapse panel-body" id="widget2container">
+                @using (Html.BeginForm("DangKyNguoiDung", "NguoiDung", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true) 
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="your-details"> 
+                                    <h5> Thông tin chính. </h5>
+                                    <div class="form-row">
+                                        <label class="lebel-abs">Tên đăng nhập   <strong class="red">*  </strong> </label>
+                                        <input type="text" class="input namefild"  name="TenDangNhap" maxlength="20" oninput="VietKhongDau(this)" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-row">
+                                            <label class="lebel-abs"> Mật khẩu: <strong class="red"> * </strong> </label>
+                                            <input type="password"  class="input namefild" name="MatKhau" maxlength="20" oninput="VietKhongDau(this)" required />
+                                        </div> 
+                                        <div>
+                                            (ít nhất là 6 ký tự)
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="form-row">
+                                            <label class="lebel-abs"> Xác nhận mật khẩu: <strong class="red"> * </strong> </label>
+                                            <input type="password" class="input cpass" name="NhapLaiMatKhau" maxlength="20" oninput="VietKhongDau(this)" required />
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div>
+                                            (ít nhất là 6 ký tự)
+                                        </div>
+
+                                    </div> 
+                                    <div class="form-row">
+                                        <span class="input-radio"> <input type="radio" name="XacNhan" value="" required /> </span>
+                                        <span class="text"> Tôi đồng ý vs điều khoản. </span>
+                                    </div>
+
+                                </div>
+                                <button type="submit"> Đăng ký </button>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="your-details">
+                                    <h5> Thông tin thêm. </h5>
+                                    <div class="form-row">
+                                        <label class="lebel-abs"> Họ: <strong class="red"> * </strong> </label>
+                                        <input type="text" maxlength="9" oninput="maxLengthCheck(this)" class="input namefild" name="Ho" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <label class="lebel-abs"> Tên <strong class="red"> *  </strong> </label>
+                                        <input type="text" maxlength="18" oninput="maxLengthCheck(this)" class="input namefild" name="Ten" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <label class="lebel-abs"> Email: <strong class="red"> * </strong> </label>
+                                        <input type="email" maxlength="20" class="input namefild" name="Email" required>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        (ít nhất là 6 ký tự)
+                                    </div>
+
+                                    <div class="form-row">
+                                        <label class="lebel-abs"> Số điện thoại: <strong class="red"> * </strong> </label>
+                                        <input type="number" minimumlength="6" maxlength="15" oninput="maxLengthCheck(this)" onkeypress='return isNumberKey(event)' class="input namefild" name="SDT">
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        (ít nhất là 6 ký tự)
+                                    </div>
+
+                                    <div class="form-row">
+                                        <label class="lebel-abs"> Địa chỉ : <strong class="red"> * </strong> </label>
+                                        <input type="text" maxlength="40" oninput="maxLengthCheck(this)" class="input namefild" name="DiaChi" required>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        (ít nhất là 6 ký tự)
+                                    </div>
+                                    <h5>Ngày sinh:</h5>
+                                    <div class="form-row">
+                                        <input type="date" class="input namefild" name="NgaySinh" max="@string.Format("{0:yyyy-MM-dd}", @DateTime.Now)" required />
+                                    </div>
+
+                                    <h5> Giới tính </h5>
+                                    <div class="form-row">
+                                        <p>
+                                            <span class="input-radio"> <input type="radio" name="GioiTinh" value="Nữ" required/> </span>
+                                            <span class="text"> Nữ. </span>
+                                        </p>
+                                        <p>
+                                            <span class="input-radio"> <input type="radio" name="GioiTinh" value="Nam" required/> </span>
+                                            <span class="text"> Nam. </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+        </li>
+        <!--Đăng nhập-->
+        <li class="steps active">
+            <a href="#dangnhap" class="panel-heading collapsed step-title" data-toggle="collapse">02. ĐĂNG NHẬP </a>
+            <div class="step-description collapse panel-body" id="dangnhap">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="new-customer">
+                            <h5> LƯU Ý. </h5>
+                            <p class="requir">
+                                Trong ô <strong style="color:red; font-size:16px;">Tài khoản </strong>bạn có thể dùng <strong style="color:red; font-size:16px;">tên đăng nhập</strong> hoặc <strong style="color:red; font-size:16px;">Email</strong> để đăng nhập.
+                            </p>
+                            <p class="requir">
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="run-customer">
+                            <h5>
+                                Thông tin đăng nhập.
+                            </h5>
+                            @using (Html.BeginForm("DangNhapmoi", "NguoiDung", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true)
+                                <form>
+                                    <div class="form-row">
+                                        <label class="lebel-abs">Tài khoản <strong class="red"> * </strong> </label>
+                                        <input type="text" maxlength="30" class="input namefild" name="TenDangNhap" required>
+                                    </div>
+                                    <div class="form-row">
+                                        <label class="lebel-abs"> Mật khẩu <strong class="red"> * </strong> </label>
+                                        <input type="password" maxlength="30" class="input namefild" oninput="VietKhongDau(this)" name="MatKhau" required>
+                                    </div>
+                                    <p class="forgoten">
+                                        <a href="@Url.Action("QuenMatKhau", "NguoiDung")"> Quên mật khẩu? </a>
+                                    </p>
+                                    <button type="submit"> Đăng nhập </button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <!--Quên mật khẩu-->
+                                                @*<li class="steps active">
+                                                        <a href="#quenmatkhau" class="panel-heading collapsed step-title" data-toggle="collapse">03. QUÊN MẬT KHẨU </a>
+                                                        <div class="step-description collapse panel-body" id="quenmatkhau">
+                                                            <div class="row">
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="new-customer">
+                                                                        <h5> LƯU Ý </h5>
+                                                                        <p class="requir">
+                                                                            Bạn hãy nhập đúng <strong style="color:red; font-size:16px;">Tên đăng nhập</strong> và <strong style="color:red; font-size:16px;">Email</strong>.
+                                                                        </p>
+                                                                        <p>
+                                                                            <strong style="color:red; font-size:16px;">@ViewBag.matkhaumoi</strong>
+                                                                        </p>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <div class="run-customer">
+                                                                        <h5>
+                                                                            Thông tin cần điền.
+                                                                        </h5>
+                                                                        @using (Html.BeginForm("QuenMatKhau", "NguoiDung", FormMethod.Post))
+                                                                        {
+                                                                            @Html.ValidationSummary(false)
+                                                                            <form>
+                                                                                <div class="form-row">
+                                                                                    <label class="lebel-abs">Tên đăng nhập <strong class="red"> * </strong> </label>
+                                                                                    <input type="text" class="input namefild" name="TenDangNhap">
+                                                                                </div>
+                                                                                <div class="form-row">
+                                                                                    <label class="lebel-abs"> Email <strong class="red"> * </strong> </label>
+                                                                                    <input type="text" class="input namefild" name="Email">
+                                                                                </div>
+                                                                                <button type="submit"> Login </button>
+                                                                            </form>
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>*@
+        <!--Đổi mật khẩu-->
+        <li class="steps active">
+            <a href="#doimatkhau" class="panel-heading collapsed step-title" data-toggle="collapse">04. ĐỔI MẬT KHẨU </a>
+            <div class="step-description collapse panel-body" id="doimatkhau">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="new-customer">
+                            <h5> LƯU Ý </h5>
+                            <p class="requir">
+                                <strong style="color:red; font-size:16px;">Mật khẩu mới</strong> Và <strong style="color:red; font-size:16px;">Xác nhận</strong> lại phải giống nhau.
+                            </p>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="run-customer">
+                            <h5>
+                                Thông tin cần điền.
+                            </h5>
+                            <h5>
+                                <span style="color: red; font-size: 16px;">* @ViewBag.ThongBao</span>
+                            </h5>
+                                                @*<p>@ViewBag.Thongbao</p>*@
+                            @using (Html.BeginForm("DoiMatKhau", "NguoiDung", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(false)
+                                            <form>
+                                                <div class="form-row">
+                                                    <label class="lebel-abs">Mật khẩu cũ <strong class="red"> * </strong> </label>
+                                                    <input type="password" class="input namefild" name="MatKhauCu" maxlength="20" oninput="VietKhongDau(this)" required>
+                                                </div>
+                                                <div class="form-row">
+                                                    <label class="lebel-abs">Mật khẩu mới <strong class="red"> * </strong> </label>
+                                                    <input type="password" class="input namefild" name="MatKhauMoi" maxlength="20" oninput="VietKhongDau(this)" required>
+                                                </div>
+                                                <div class="form-row">
+                                                    <label class="lebel-abs">Xác nhận lại <strong class="red"> * </strong> </label>
+                                                    <input type="password" class="input namefild" name="XacNhanMatKhau" maxlength="20" oninput="VietKhongDau(this)" required>
+                                                </div>
+                                                <button type="submit"> Đổi mật khẩu </button>
+                                            </form>
+                                            }
+                                        </div>
+                    </div>
+                </div>
+            </div>
+        </li> 
+    </ol>
+</div>   
+ 

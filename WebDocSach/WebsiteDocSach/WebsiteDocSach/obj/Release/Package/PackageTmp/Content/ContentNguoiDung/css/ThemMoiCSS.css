@@ -1,0 +1,38 @@
+﻿#tabchitiet{float: left;width: 100%;margin-bottom: 10px;}
+#tabchitiet ul{position: relative;}
+#tabchitiet ul li{float: left;display: inline-block;margin-right: 10px;}
+#tabchitiet ul li:last-child{margin-right: 0;}
+#tabchitiet ul li a{
+	display: block;
+	padding: 15px 20px;
+	font-size: 18px;
+	border: 1px solid #cccccc;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	position: relative;
+}
+#tabchitiet ul li a:hover, #tabchitiet ul li.active a{
+	position: relative;
+	background: #f7544a;
+	color: #fff;
+	border: 1px solid #f7544a;
+}
+
+#tabchitiet ul li a:hover:after, #tabchitiet ul li.active a:after{
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(247, 84, 74, 0);
+	border-top-color: #f7544a;
+	border-width: 10px;
+	margin-left: -10px;
+}
+
+.tab-content {
+    float: left; width: 100%;
+}

@@ -1,0 +1,75 @@
+﻿<div class="price-filter leftbar">
+    <h3 class="title" style="font-weight: bold;" id="TIMSACHTHEOGIA">
+        TÌM SÁCH THEO GIÁ
+    </h3>
+    @using (Html.BeginForm("TimKiemTheoGiaMoi", "TimKiem", FormMethod.Post))
+    { 
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    <form class="pricing">
+
+        <div class="form-group input-group">
+            <input type="number" placeholder="Bắt đầu từ giá......" name="GiaNho" maxlength="3" oninput="maxLengthCheck(this)" onkeypress='return isNumberKey(event)' style="width:100%"   /> 
+            @*<input type="number" placeholder="Bắt đầu từ giá......" class="form-control" name="GiaNho" maxlength="6" oninput="maxLengthCheck(this)" onkeypress='return isNumberKey(event)' required />*@
+            <span class="input-group-addon">000 VND</span>
+        </div>
+        <div class="form-group input-group">
+            <input type="number" placeholder="Đến giá......" name="GiaLon" oninput="maxLengthCheck(this)" onkeypress='return isNumberKey(event)' maxlength="3" style="width:100%" />
+            @*<input type="number" placeholder="Đến giá......" class="form-control" name="GiaLon" maxlength="6" oninput="maxLengthCheck(this)" onkeypress='return isNumberKey(event)' required />*@
+            <span class="input-group-addon">000 VND</span>
+        </div> 
+        <input type="submit" class="classname" value="Tìm">
+    </form>
+    }
+</div>
+
+
+<style type="text/css">
+    .classname {
+        -moz-box-shadow: inset 1px 0px 50px -14px #bbdaf7;
+        -webkit-box-shadow: inset 1px 0px 50px -14px #bbdaf7;
+        box-shadow: inset 1px 0px 50px -14px #bbdaf7;
+        background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+        background: -moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
+        background-color: #79bbff;
+        -webkit-border-top-left-radius: 42px;
+        -moz-border-radius-topleft: 42px;
+        border-top-left-radius: 42px;
+        -webkit-border-top-right-radius: 42px;
+        -moz-border-radius-topright: 42px;
+        border-top-right-radius: 42px;
+        -webkit-border-bottom-right-radius: 42px;
+        -moz-border-radius-bottomright: 42px;
+        border-bottom-right-radius: 42px;
+        -webkit-border-bottom-left-radius: 42px;
+        -moz-border-radius-bottomleft: 42px;
+        border-bottom-left-radius: 42px;
+        text-indent: -1px;
+        border: 3px solid #84bbf3;
+        display: inline-block;
+        color: #ffffff;
+        font-family: Arial;
+        font-size: 29px;
+        font-weight: bold;
+        font-style: normal;
+        height: 49px;
+        line-height: 49px;
+        width: 128px;
+        text-decoration: none;
+        text-align: center;
+        text-shadow: 8px 6px 0px #528ecc;
+    }
+
+        .classname:hover {
+            background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
+            background: -moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
+            background-color: #378de5;
+        }
+
+        .classname:active {
+            position: relative;
+            top: 1px;
+        }
+</style> 

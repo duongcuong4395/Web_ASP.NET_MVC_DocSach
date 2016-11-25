@@ -1,0 +1,16 @@
+﻿<div class="product-tag leftbar">
+    <h3 class="title"> TÁC GIẢ @*<strong> Tags </strong>*@ </h3>
+    <ul>
+        @foreach (var item in Model)
+        {
+            @**@
+            <li>
+                <a href="@Url.Action("SachTheoTacGia", "Sach", new { @idtacgia = item.idtacgia })">@item.hotentg </a>
+                @*<span class="badge badge-info">
+                    @item.SL
+                </span>*@
+            </li>
+        } 
+    </ul>
+</div>
+ 

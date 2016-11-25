@@ -1,0 +1,125 @@
+﻿@using WebsiteDocSach.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<sach> 
+
+@{
+    ViewBag.Title = "SachTheoTacGia";
+    Layout = "~/Views/Layout/LayoutNguoiDung.cshtml";
+}
+
+<div class="banner">
+    <div class="bannerslide" id="bannerslide">
+
+        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+            <ul class="slides" style="width: 800%; transition-duration: 0s; transform: translate3d(-1396px, 0px, 0px);">
+                <li class="clone" style="width: 698px; float: left; display: block;">
+                    <a href="#">
+                        <img src="images/banner-02.jpg" alt="" draggable="false">
+                    </a>
+                </li>
+                <li class="clone" aria-hidden="true" style="width: 698px; float: left; display: block;">
+                    <a href="#">
+                        <img src="images/banner-02.jpg" alt="" draggable="false">
+                    </a>
+                </li>
+                <li class="" style="width: 698px; float: left; display: block;">
+                    <a href="#">
+                        <img src="images/banner-01.jpg" alt="" draggable="false">
+                    </a>
+                </li>
+                <li class="flex-active-slide" style="width: 698px; float: left; display: block;">
+                    <a href="#">
+                        <img src="images/banner-02.jpg" alt="" draggable="false">
+                    </a>
+                </li>
+                <li class="clone" aria-hidden="true" style="width: 698px; float: left; display: block;">
+                    <a href="#">
+                        <img src="images/banner-01.jpg" alt="" draggable="false">
+                    </a>
+                </li>
+                <li class="clone" style="width: 698px; float: left; display: block;">
+                    <a href="#">
+                        <img src="images/banner-01.jpg" alt="" draggable="false">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+
+<div class="products-grid" id="SachTheoTheLoai">
+    <h2 class="title text-center">@ViewBag.hotentg</h2>
+    <h2 class="title text-center">@ViewBag.ThongBao</h2>
+
+    <div class="clearfix">
+    </div>
+    <div class="row">
+        @{
+            int dem = 0;
+        }
+        @foreach (var item in Model)
+        {
+            dem++;
+            <div class="col-md-3 col-sm-6">
+                <div class="products">
+                    @{
+            int km = int.Parse(item.khuyenmai);
+                    }
+                    @if (km == 100)
+                    {
+                        <div class="offer">FREE</div>
+                    }
+                    else
+                    {
+                        <div class="offer">- @km %</div>
+                    }
+
+                    <div class="thumbnail">
+                        <a href="@Url.Action("XemChiTiet", "Sach", new { id = item.idsach })">
+                            <img src="~/Images/AnhBia/@item.anhbia" alt="@item.tensach" style="height: 180px; width: 100px">
+                        </a>
+                    </div>
+                    <div class="productname">@item.tensach</div> 
+                        <p class="price">Giá gốc: @String.Format("{0:0,0}", item.gia) VND</p> 
+                    <div class="button_group">
+                        <div>
+                            <a class="button compare" href="@Url.Action("ThemGioHang", "GioHang", new { @sidsach = @item.idsach, @strURL = Request.Url.ToString() })">
+                                THÊM VÀO GIỎ
+                            </a>
+                        </div>
+                        <br />
+                        <div class="clearfix"></div>
+                        <div>
+                            <a class="button wishlist" href="@Url.Action("ThemSPYeuThich", "SachStore", new { idsach = @item.idsach, @strURL = Request.Url.ToString() })">
+                                <i class="fa fa-heart-o">
+                                    Thích
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            if (dem == 4)
+            {
+                <div class="clearfix"></div>
+                dem = 0;
+            }
+        }
+    </div>
+    <div class="clearfix">
+    </div>
+    <div class="toolbar"> 
+       
+    </div>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) Trong tổng số @Model.PageCount Trang;
+
+    <div class="pager">
+        @Html.PagedListPager(Model, page => Url.Action("SachTheoTacGia","Sach", new { @idtacgia = ViewBag.idtacgia, page = page }))
+    </div>
+    <div class="clearfix">
+    </div>
+</div>
+
+

@@ -1,0 +1,92 @@
+﻿ 
+  
+.disconnect
+{
+    position: absolute;
+    margin: 10px;
+    background-color: #ffcbcb;
+    padding: 4px;
+    border: solid 1px red;
+}
+
+
+.draggable
+{
+    position: absolute;
+    border: #5f9482 solid 1px !important;
+    width: 250px;
+}
+
+    .draggable  
+    {
+        cursor: move;
+        background-color: #d7e5e4;
+        border-bottom: #5f9482 solid 1px;
+        color: #1e4638;
+    }
+
+    .draggable .selText
+    {
+        color: black;
+        padding: 4px;
+    }
+
+    .headerchat {
+        background-color: #15c418;
+        height: 26px;
+
+        -webkit-border-top-right-radius: 24px;
+        -webkit-border-top-left-radius: 24px;
+    }
+    .khungTextChat{
+        border-top-left-radius:  30px 50px;
+        border-top-right-radius: 30px 50px;
+        border-bottom-left-radius:  30px 50px;
+        border-bottom-right-radius: 30px 50px;
+        background-color: #15c418;
+    }
+
+    .textChat{
+        max-width: 50px;
+        font-size: 14px; 
+        color: white;
+        position:relative;
+    }
+
+.messageArea .header {
+    background-color: #5f9482;
+}
+
+    .draggable .messageArea
+    {
+        width: 250px;
+        overflow-y: scroll;
+        height: 250px; 
+        color: orange;
+
+         border-bottom: #5f9482 solid 1px;
+         background-image: url("/Pictures/icon/original.png");
+    }
+     
+
+        .draggable .messageArea .message
+        {
+            padding: 4px; 
+        }
+
+    .draggable .buttonBar
+    {
+        width: 250px;
+       padding:4px;
+    }
+
+        .draggable .buttonBar .msgText
+        {
+            width: 172px;
+        }
+
+        .draggable .buttonBar .button
+        {
+           margin-left:4px;
+            width: 55px;
+        }

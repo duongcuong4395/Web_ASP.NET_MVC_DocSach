@@ -1,0 +1,42 @@
+﻿@model WebsiteDocSach.Models.tacgia
+
+@{
+    ViewBag.Title = "XoaTacGia";
+    Layout = "~/Views/Layout/LayoutQuanTri.cshtml";
+}
+
+<h2>XoaTacGia</h2>
+
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên tác giả:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotentg)
+        </dd>
+
+        <dt>
+            Tiểu sử:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tieusu)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Trở lại", "TacGia")
+        </div>
+    }
+</div>

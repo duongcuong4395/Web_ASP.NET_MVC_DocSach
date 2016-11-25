@@ -1,0 +1,57 @@
+﻿@model WebsiteDocSach.Models.khachhang
+
+@{
+    ViewBag.Title = "Quên mật khẩu";
+    Layout = "~/Views/Layout/LayoutNguoiDung.cshtml";
+}
+
+<p> @ViewBag.ThongBaoChung</p>
+<div class="checkout-page">
+    <ol class="checkout-steps">
+        <li class="steps active">
+            <a href="#widget2container" class="panel-heading collapsed step-title" data-toggle="collapse">QUÊN MẬT KHẨU </a>
+            <div class="step-description collapse panel-body" id="widget2container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="new-customer">
+                            <h5> LƯU Ý </h5>
+                            <p class="requir">
+                                Bạn hãy nhập đúng <strong style="color:red; font-size:16px;">Tên đăng nhập</strong> và <strong style="color:red; font-size:16px;">Email</strong>.
+                            </p>
+                            <p>@ViewBag.Thongbao</p> 
+                            <p>@ViewBag.tb</p>
+                            
+                            <p>@ViewBag.Thongbao2 <a style="color: blue; font-weight: bold;" href="https://mail.google.com" target="_blank">@ViewBag.thongbao3</a>.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="run-customer">
+                            <h5>
+                                Thông tin cần điền.
+                            </h5>
+                            @using (Html.BeginForm("QuenMatKhau", "NguoiDung", FormMethod.Post))
+                            {
+                                @Html.ValidationSummary(false)
+                                @Html.AntiForgeryToken()
+                                <form>
+                                    <div class="form-row">
+                                        <label class="lebel-abs">Tên đăng nhập <strong class="red"> * </strong> </label>
+                                        <input type="text" class="input namefild" name="TenDangNhap">
+                                    </div>
+                                    <div class="form-row">
+                                        <label class="lebel-abs"> Email <strong class="red"> * </strong> </label>
+                                        <input type="text" class="input namefild" name="Email">
+                                    </div>
+                                     
+                                    <button type="submit"> Lấy mật khẩu </button>
+                                </form>
+                            } 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ol>
+</div>
+
+ 

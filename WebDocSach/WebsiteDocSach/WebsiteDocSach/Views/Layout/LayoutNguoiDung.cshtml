@@ -1,0 +1,501 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="images/favicon.png"> 
+        <title>@ViewBag.Title</title> 
+        <link href="~/Content/ContentNguoiDung/css/bootstrap.css" rel="stylesheet" /> 
+        
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,500italic,100italic,100' rel='stylesheet' type='text/css'>
+       
+        <link href="~/Content/ContentNguoiDung/css/font-awesome.min.css" rel="stylesheet" /> 
+        <link href="~/Content/ContentNguoiDung/css/flexslider.css" rel="stylesheet" /> 
+        <link href="~/Content/ContentNguoiDung/css/sequence-looptheme.css" rel="stylesheet" /> 
+        <link href="~/Content/ContentNguoiDung/css/style.css" rel="stylesheet" />
+        <link href="~/Content/ContentNguoiDung/css/ThemMoiCSS.css" rel="stylesheet" />
+        <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+        <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script><![endif]-->
+        <link href="~/Content/ContentsChart/jquery.ui.all.css" rel="stylesheet" />  
+        <link href="~/Content/ContentsChart/jquery.ui.accordion.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/jquery.ui.core.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/ChatStyle.css" rel="stylesheet" /> 
+        <link href="~/Content/ContentsChart/jquery.ui.autocomplete.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/jquery.ui.datepicker.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/jquery.ui.dialog.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/jquery.ui.menu.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/jquery.ui.progressbar.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/jquery.ui.resizable.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/jquery.ui.selectable.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/jquery.ui.slider.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/jquery.ui.spinner.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/jquery.ui.tooltip.css" rel="stylesheet" />
+        <link href="~/Content/ContentsChart/jquery.ui.tabs.css" rel="stylesheet" />
+         
+        <link rel="shortcut icon" href="~/Images/Icon/BookStore.ico">
+
+        .<style type="text/css">
+    .subiz_online {
+        cursor: pointer;
+        display: block;
+        height: 54px;
+        width: 238px;
+        line-height: 22px;
+        text-indent: -99999px;
+        background: url(https://dashboard.subiz.com/public/img/button/gallery/subiz-button4-online.png) no-repeat scroll left center white;
+    }
+
+    .subiz_offline {
+        cursor: pointer;
+        display: block;
+        height: 54px;
+        width: 238px;
+        line-height: 22px;
+        text-indent: -99999px;
+        background: url(https://dashboard.subiz.com/public/img/button/gallery/subiz-button4-offline.png) no-repeat scroll left center white;
+    } 
+     
+</style>  
+
+         
+    </head>
+    <body id="home">
+
+        <div class="wrapper">
+            <div class="header">
+                <!--sagfiuashyoidasd-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2">
+                            <div class="logo">
+                                <a href="@Url.Action("Index", "SachStore")">  
+                                    <img src="~/Images/Logo/1.jpg" alt="logo"/>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-10 col-sm-10">
+                            <div class="header_top">
+                                <div class="row">
+                                    @*<div class="col-md-3">
+                                        <ul class="option_nav">
+                                            <li class="dorpdown">
+                                                <a href="#">Eng</a>
+                                                <ul class="subnav">
+                                                    <li><a href="#">Eng</a></li>
+                                                    <li><a href="#">Vns</a></li>
+                                                    <li><a href="#">Fer</a></li>
+                                                    <li><a href="#">Gem</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="dorpdown">
+                                                <a href="#">USD</a>
+                                                <ul class="subnav">
+                                                    <li><a href="#">USD</a></li>
+                                                    <li><a href="#">UKD</a></li>
+                                                    <li><a href="#">FER</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>*@
+                                    <div class="col-md-8">
+                                        <ul class="topmenu"> 
+                                            @Html.Action("taikhoanPartial", "NguoiDung",false)
+                                        </ul>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="header_bottom">
+                                <ul class="option"> 
+                                    
+                                    <li id="search" class="search">
+                                        @using (Html.BeginForm("KetQuaTimKiem", "TimKiem", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true)
+                                        <form>
+                                            <input class="search-submit" type="submit" value="" />
+                                            <input  type="text" placeholder="Tìm kiếm...." name="txtTimKiem" class="search-input" >
+                                        </form>
+                                        }
+                                    </li> 
+                                    <!--Giỏ hàng trang Layout-->
+                                     @Html.Action("GioHangLayoutNguoiDung", "GioHang",false)
+                                </ul>
+                                <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div>
+                                <div class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li class="active dropdown">
+                                            <a href="" class="dropdown-toggle" data-toggle="dropdown">TRANG CHỦ</a>
+                                            <div class="dropdown-menu">
+                                                <ul class="mega-menu-links">
+                                                    <li><a href="@Url.Action("Index", "SachStore")">Trang chủ</a></li>
+                                                    <li><a href="#CHUDE">Chủ đề</a></li>
+                                                    <li><a href="#NHAXUATBAN">Nhà xuất bản</a></li>
+                                                    <li><a href="#TIMSACHTHEOGIA">Tìm sách theo giá</a></li>
+                                                    <li><a href="#SACHMIENPHI">Sách miễn phí</a></li> 
+                                                    <li><a href="#TroChuyen4Phuong">Trò chuyện 4 phương</a></li> 
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        @*<li><a href="productgird.html">men</a></li>
+                                        <li><a href="productlitst.html">women</a></li>*@
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tác giả</a>
+                                            <div class="dropdown-menu mega-menu">
+                                                <div class="row"> 
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <ul class="mega-menu-links">
+                                                            @Html.Action("tacgiatheosoluong", "Sach", new {skip = 0, take = 6}) 
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <ul class="mega-menu-links">
+                                                            @Html.Action("tacgiatheosoluong", "Sach", new { skip = 6, take = 6 }) 
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        @*<li><a href="productgird.html">gift</a></li>*@ 
+                                        @*<li><a href="productgird.html">blog</a></li>
+                                        <li><a href="productgird.html">jewelry</a></li>*@
+                                        <li><a href="@Url.Action("LienHeCuaHang", "SachStore")">Liên hệ</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="hom-slider" >
+                <!--hom-slider-->
+                <div class="container" >
+                    <div id="sequence" style="background-image: url('../../Images/Logo/bookstore-banner-i18.jpg'); ">
+                        <div class="sequence-prev"><i class="fa fa-angle-left"></i></div>
+                        <div class="sequence-next"><i class="fa fa-angle-right"></i></div>
+                        <ul class="sequence-canvas">
+                            <li class="animate-in"> 
+                                <div class="flat-caption caption2 formLeft delay400 text-center">
+                                    <h1 style="color: white;background-color: blueviolet; font-weight:bold ">BOOKSTORE AC KÍNH CHÀO QUÝ KHÁCH</h1>
+                                </div> 
+                            </li> 
+                        </ul>
+                    </div>
+                </div>
+                <div class="promotion-banner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="promo-box">
+                                    @*<img src="images/promotion-01.png" alt="">*@
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="promo-box">
+                                    @*<img src="images/promotion-02.png" alt="">*@
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="promo-box">
+                                    @*<img src="images/promotion-03.png" alt="">*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="container_fullwidth">
+                @RenderSection("GioHangRenderSection", false) 
+                @RenderSection("LienHeRenderSection", false)
+                <div class="container" id="menuchinh">
+                    <div class="row"> 
+                        <div class="col-md-3" id="menuphu">
+                            @Html.Action("TheLoaiSachPartial", "Sach")
+                            <div class="clearfix">
+                            </div>
+                            @Html.Action("NhaXuatBanPartial", "Sach")
+                            <div class="clearfix">
+                            </div>
+                            <!--Tim Kiếm theo giá-->
+                            @Html.Action("TimKiemTheoGia", "TimKiem",false)
+                            <div class="clearfix"> </div> 
+                            <div class="clearfix">
+                            </div>
+                            <!--Tim Kiếm theo Tên tác giả-->
+                            @Html.Action("TacGiaPartial", "Sach")
+                            <div class="clearfix">
+                            </div>
+                            <!--Số lượng View-->
+                            @Html.Action("soLuongNguoiXem", "SachStore")
+                             
+                            <!--ChatOnline-->
+                            <div class="product-tag leftbar" >
+                                <!--Chat-->
+                                <div id="divContainer">
+                                    <div id="divLogin" class="row">
+                                        <div class="col-xs-12 .col-md-8">
+                                            <div class="panel panel-success">
+                                                <div class="panel-heading">
+                                                    <h5 id="TroChuyen4Phuong">TRÒ CHUYỆN 4 PHƯƠNG.</h5>
+                                                </div>
+                                                <div id="divButton" class="panel-body">
+                                                    <div class="input-group">
+                                                        <input id="txtNickName" type="text" class="form-control" placeholder="Tên của bạn...." />
+                                                        <button id="btnStartChat" type="button" class="btn btn-primary">Bắt đầu chat</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <span style="color: black; font-weight:bold"> </span>
+                                    <div id="divChat" class="row">
+                                        <div class="col-xs-12 .col-md-8">
+                                            <div class="panel panel-success">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">[<span id='spanUser'></span>]</h3>
+                                                </div> 
+                                                <div class="panel-body">
+                                                    <div id="divChatWindow" class="chatWindow">
+                                                    </div>
+                                                </div> 
+                                                <div class="panel-footer">
+                                                     
+                                                    <div class="input-group">
+                                                        <input class="form-control" type="text" id="txtMessage" placeholder="Nhập tin nhắn"/> 
+                                                        <span class="input-group-btn">
+                                                            <button id="btnSendMsg" type="button" class="btn btn-primary">
+                                                                Gửi
+                                                            </button> 
+                                                        </span>
+                                                    </div> 
+                                                     
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <input id="hdId" type="hidden" />
+                                    <input id="hdUserName" type="hidden" />
+                                </div> 
+
+                            </div>
+
+                            <div class="clearfix">
+                            </div> 
+                            <div class="clearfix">
+                            </div>
+                            <div class="fbl-box leftbar">
+                                <!--Hỗ trợ chat vs Admin-->
+                                <div class="subiz_status"></div>
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                            <div class="leftbanner">
+                                @*<img src="images/banner-small-01.png" alt="">*@
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            @RenderBody() 
+                            @RenderSection("XemChiTiet", false)
+                            @Html.Action("SachMienPhi", "SachStore", false) 
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                    </div> 
+                </div>
+                
+                
+
+
+            </div>  
+            <div class="clearfix"></div>
+
+            
+
+                <div class="clearfix"></div>
+                <div class="footer">
+                    <div class="footer-info">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="footer-logo">
+                                        <a href="@Url.Action("Index", "SachStore")">
+                                            <img src="~/Images/Logo/1.jpg" alt="logo" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <h4 class="title">
+                                        Thông tin 
+                                        <strong>
+                                            liên hệ
+                                        </strong>
+                                    </h4>
+                                    <p>
+                                        Địa chỉ: 08, Nguyen Trai, TP.HCM , Vietnam
+                                    </p>
+                                    <p>
+                                        Call Us : (08) 1900 1008
+                                    </p>
+                                    <p>
+                                        Email : websitesdocsach@gmail.com
+                                    </p>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <h4 class="title">
+                                        Thông tin 
+                                        <strong>
+                                            hỗ trợ
+                                        </strong>
+                                    </h4>
+                                    <ul class="support">
+                                        <li>
+                                            <a href="https://www.facebook.com/">
+                                                Facebook
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://vn.yahoo.com/">
+                                                yahoo
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://twitter.com">
+                                                Twitter
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="http://zalo.me/">
+                                                Zalo
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div> 
+                                <div class="col-md-3"> 
+                                    <img src="~/Images/Logo/Map.PNG" /> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="copyright-info">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p> Đặng Dương Cường - Huỳnh Anh </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="social-icon">
+                                        <li>
+                                            <a href="www.linkedin.com" class="linkedin"> </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://plus.google.com/" class="google-plus"> </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://twitter.com" class="twitter"> </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.facebook.com/" class="facebook"> </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        
+        
+        <script type='text/javascript'>
+            window._sbzq || function (e) { e._sbzq = []; var t = e._sbzq; t.push(["_setAccount", 53868]); var n = e.location.protocol == "https:" ? "https:" : "http:"; var r = document.createElement("script"); r.type = "text/javascript"; r.async = true; r.src = n + "//static.subiz.com/public/js/loader.js"; var i = document.getElementsByTagName("script")[0]; i.parentNode.insertBefore(r, i) }(window);
+        </script>
+
+         
+
+        <!-- Bootstrap core JavaScript==================================================--> 
+        <script src="~/Scripts/ScriptsNguoiDung/js/jquery-1.10.2.min.js"></script> 
+        <script src="~/Scripts/ScriptsNguoiDung/js/jquery.easing.1.3.js"></script> 
+        <script src="~/Scripts/ScriptsNguoiDung/js/bootstrap.min.js"></script> 
+        <script src="~/Scripts/ScriptsNguoiDung/js/jquery.sequence-min.js"></script> 
+        <script src="~/Scripts/ScriptsNguoiDung/js/jquery.carouFredSel-6.2.1-packed.js"></script> 
+        <script src="~/Scripts/ScriptsNguoiDung/js/jquery.flexslider.js"></script> 
+        <script src="~/Scripts/ScriptsNguoiDung/js/script.min.js"></script>  
+        @*<script src="https://npmcdn.com/draggabilly@2.1/dist/draggabilly.pkgd.js"></script>*@
+        <script src="~/Scripts/KeoThaHinhAnh/abce.js"></script>
+
+
+        <script src="~/Scripts/ScriptsNguoiDung/GoogleMap.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYgu-Biz5geySgi99huIbX4bvUpmKtlV8&callback=initMap"> </script>
+
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-60343429-1', 'auto');
+            ga('send', 'pageview');
+        </script> 
+
+
+
+        <div id="fb-root"></div>
+        <script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=699226050227121";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+        <script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '699226050227121',
+            xfbml: true,
+            version: 'v2.8'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+        </script> 
+
+        <script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+        </script>
+        <script src="~/Scripts/ScriptsNguoiDung/ScriptsCheckError.js"></script> 
+        <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+        <script src="~/Content/ContentsChart/jquery.ui.core.js"></script>
+        <script src="~/Content/ContentsChart/jquery.ui.widget.js"></script>
+        <script src="~/Content/ContentsChart/jquery.ui.mouse.js"></script>
+        <script src="~/Content/ContentsChart/jquery.ui.draggable.js"></script>
+        <script src="~/Content/ContentsChart/jquery.ui.resizable.js"></script>
+        <script src="~/Scripts/jquery.signalR-2.2.1.js"></script>
+        <script src="/signalr/hubs"></script>
+        <script src="~/Scripts/ScriptsNguoiDung/ChatUser.js"></script> 
+    </body>
+</html>

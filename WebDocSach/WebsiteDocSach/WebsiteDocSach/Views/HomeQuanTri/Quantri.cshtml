@@ -1,0 +1,65 @@
+﻿@using BOOKSTORE_ONLINE.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<BOOKSTORE_ONLINE.Models.QuanTri>
+@{
+    ViewBag.Title = "Quantri";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3><strong>Administrator</strong></h3>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="racetimes">
+    <tr id="firstrow">
+        <th style="width:200px; text-align:center">
+            Tài khoản
+        </th>
+        <th style="width:200px; text-align:center">
+            Password
+        </th>
+        <th style="width:200px; text-align:center">
+            Tên quyền
+        </th>
+        <th style="width:200px; text-align:center">
+            HÌnh ảnh
+        </th>
+        <th style="width:200px; text-align:center">
+            
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phanquyen.TenQuyen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hinhanh)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idadmin }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idadmin }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idadmin })
+            </td>
+        </tr>
+    }
+
+</table>
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+                <div class="MenuTrang">
+                    @Html.PagedListPager(Model, page => Url.Action("Quantri", new { page = page }))
+                </div>
+                <style>
+                    .MenuTrang li {
+                        display: inline;
+                    }
+                </style>

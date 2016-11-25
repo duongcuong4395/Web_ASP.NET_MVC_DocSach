@@ -1,0 +1,78 @@
+﻿@using WebsiteDocSach.Models
+@model List<GioHang> 
+ 
+    @*<li class="option-cart">
+        <a href="#" class="cart-icon">cart <span class="cart_no">@ViewBag.TongSoLuongmoi</span></a>
+        <ul class="option-cart-sanpham">
+            @foreach(var sanpham in Model)
+            {
+            <li>
+                <div class="cart-sanpham">
+                    <div class="image"><img src="~/Images/AnhBia/@sanpham.sAnhBia" alt=""></div>
+                    <div class="sanpham-description">
+                        <p class="name">@sanpham.sTenHangHoa</p>
+                        <p>Size: <span class="light-red">Số lượng</span><br>Quantity: <span class="light-red">@sanpham.iSoLuong</span></p>
+                    </div>
+                    <div class="right">
+                        <p class="price">@String.Format("{0:0,0}", sanpham.dGiaMoi) VND</p>
+                        <a href="@Url.Action("XoaGioHang", "GioHang", new {id = sanpham.sidsach })">Xóa </a>
+                    </div>
+                </div>
+            </li>
+            }
+            <li>
+                @if (ViewBag.TongSoLuongmoi != 0)
+                {
+                    <span class="total">Tổng tiền <strong>@ViewBag.TongTienmoi</strong></span>
+                    @Html.ActionLink("ĐẶT HÀNG", "GioHang", "GioHang")
+                }
+                else
+                {
+                    <span class="total">Chưa có sách trong giỏ.</span>
+                }
+            </li>
+        </ul>
+    </li>*@   
+
+
+<li class="option-cart">
+    <a href="#" class="cart-icon">cart <span class="cart_no">@ViewBag.TongSoLuongmoi</span></a>
+    <ul class="option-cart-item">
+        @foreach (var item in Model)
+        {
+            <li>
+                <div class="cart-item">
+                    <div class="image"><img src="~/Images/AnhBia/@item.sAnhBia" alt=""></div>
+                    <div class="item-description">
+                        <p class="name">@item.sTenHangHoa</p>
+                        <p>Size: <span class="light-red">One size</span><br>Số lượng: <span class="light-red">@item.iSoLuong</span></p>
+                    </div>
+                    <div class="right">
+                        <p class="price">
+                            @String.Format("{0:0,0}", item.dGiaMoi) VND 
+                        </p>
+                        <a href="@Url.Action("XoaGioHang", "GioHang", new {id = item.sidsach })" class="remove"><img src="images/remove.png" alt="remove"></a>
+                    </div>
+                </div>
+            </li>
+        }
+        
+        <li>
+            @if (ViewBag.TongSoLuongmoi != 0)
+            {
+                <span class="total">Tổng tiền 
+                    <strong>
+                        @String.Format("{0:0,0}", @ViewBag.TongTienmoi) VND 
+                    </strong>
+                </span>
+                @Html.ActionLink("ĐẶT HÀNG", "GioHang", "GioHang")
+            }
+            else
+            {
+                <span class="total">Chưa có sách trong giỏ.</span>
+            }
+            @*<span class="total">Total <strong>$60.00</strong></span>
+            <button class="checkout" onclick="location.href='checkout.html'">CheckOut</button>*@
+        </li>
+    </ul>
+</li>

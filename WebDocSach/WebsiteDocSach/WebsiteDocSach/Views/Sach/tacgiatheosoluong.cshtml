@@ -1,0 +1,11 @@
+﻿@using WebsiteDocSach.Models
+@model List<tacgia>
+
+@foreach (var item in Model)
+{
+    <li>
+        <a href="@Url.Action("SachTheoTacGia", "Sach", new { @idtacgia = item.idtacgia })">@item.hotentg </a>
+        
+    </li>
+}
+ 

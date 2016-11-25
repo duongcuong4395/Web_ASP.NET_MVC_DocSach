@@ -1,0 +1,32 @@
+﻿<div class="sidebar-nav navbar-collapse">
+    <ul class="nav" id="side-menu">
+        <li class="sidebar-search">
+            <div class="input-group custom-search-form">
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+            <!-- /input-group -->
+        </li>
+        <li>
+            <a href="@Url.Action("Index","QuanTri")"><i class="fa fa-dashboard fa-fw"></i> Trang chủ</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quản lý sách<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                <li>
+                    <a href="@Url.Action("Sach","QuanTri")">Sách</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ChuDe", "QuanTri")">Chủ đề</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("NhaXuatBan", "QuanTri")">Nhà xuất bản</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

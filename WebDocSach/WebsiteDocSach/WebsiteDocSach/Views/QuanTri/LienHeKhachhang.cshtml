@@ -1,0 +1,668 @@
+﻿
+@{
+    ViewBag.Title = "LienHeKhachhang";
+    Layout = "~/Views/Layout/LayoutQuanTri.cshtml";
+}
+
+
+
+@*@section LienHeKhachHang {
+    <!doctype html>
+    <html data-ng-app>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+
+        <title>Subiz Live Chat</title>
+        <script type="text/javascript">
+            var base_url = 'https://dashboard.subiz.com/';
+            var resource_url = "https://dashboard.subiz.com/public/";
+            var resource_css = "https://css-dashboard.subiz.com/";
+            var resource_image = "https://agent-data.subiz.com/";
+            var socket_iso = "https://ws-dashboard-lb-1.subiz.com/";
+            var socket_iso_1 = "https://ws-dashboard-lb-2.subiz.com";
+            var socket_iso_2 = "https://ws-dashboard-lb-3.subiz.com";
+            var socket_iso_3 = "";
+            var check_ready = false;
+            var css_ready = false;
+            var id_package = "2";
+            var ready_play_message = false;
+            var ready_play_request = false;
+
+            var php_current_time = "2016-11-19 23:26:25";
+            var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjo1Mzg2OCwidXNlcm5hbWUiOiJkdW9uZ2N1b25nNzg5IiwidGltZSI6IjIwMTYtMTEtMTkgMTI6MzY6MDQifQ.xAPokxmFfaE8TH4AJ1yW3p7rEfyIh8IzzrMA_igtHDI';
+        </script>
+
+        <style>
+            body {
+                font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+                font-size: 14px;
+                font-weight: normal;
+                color: #444;
+            }
+
+            p {
+                margin: 0;
+                padding: 0;
+            }
+
+            .loadingpage {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                background-color: #FFF;
+                z-index: 99999;
+                text-align: center;
+                font-size: 14px;
+                font-weight: normal;
+                color: #444;
+            }
+
+            .loadingpagein {
+                position: fixed;
+                left: 50%;
+                margin-left: -172px;
+                top: 45%;
+                margin-top: -60px;
+            }
+
+            .loadingpage p {
+                padding: 12px 0 0 0;
+                font-weight: bold;
+                font-size: 12px;
+            }
+        </style>
+        <link href="https://dashboard.subiz.com/public/css/all.2714153c8f5bb10876f42fcd14d28f9acd7d47a7.css" media="all" rel="stylesheet" />
+        <link rel="shortcut icon" href="https://dashboard.subiz.com/public/img/favicon.ico" type="image/x-icon" />
+        <script>
+            var js_lang = {
+                the_system_is_currently_being_upgraded: "Hệ thống đang được tiến hành nâng cấp",
+                your_browser_will_automatically_refresh_after: "Trình duyệt của bạn sẽ tự động refresh sau:",
+                seconds: "giây",
+                notification_not_allow: "Subiz cần bạn cho phép để bật chức năng thông báo.",
+                notification_not_support: "Thông báo ngoài màn hình nền hiện tại chưa được hỗ trợ cho trình duyệt của bạn.",
+                notification_denied: "Thông báo bị từ chối. (Thay đổi quyền cho phép thông báo trong phần cài đặt trong trình duyệt)",
+                login_error_msg: "Đăng nhập bị trùng lặp. <a href=\'https://dashboard.subiz.com/login/logout\'>Đăng nhập lại</a>",
+                connecting_error_attemping_reconnect: "Kết nối gián đoạn, đang thực hiện lại...",
+                disconnected_try_now: "Kết nối bị gián đoạn, <a href=\'javascript:void(0);\' id=\'connect_trynow\'>thử lại</a>.",
+                connecting_error: "Lỗi kết nối, <a href=\'javascript:void(0);\' id=\'connect_trynow\'>thử lại</a>.",
+                disconnected_attemping_to_connect: "Kết nối bị gián đoạn, đang thực hiện lại...",
+                online_status: "Tôi đang online trên Subiz",
+                type_here_and_hit_enter_to_enter_chat: "Gõ vào đây và enter để chat",
+                start_typing_to_join_the_chat: "Gõ vào đây để bắt đầu cuộc chat",
+                visitor_is_typing: "đang gõ...",
+                visitor_label: "Nhãn",
+                visitor_looking: "Đang xem",
+                visitor_referred: "Referrer",
+                attemping_reconnect: "Attemping reconnect...",
+                select_action: "Chọn hành động",
+                subscription_transfer_chat: "Chuyển chat",
+                end_chat: "Kết thúc trò chuyện",
+                ban_visitor: "Chặn visitor",
+                double_click_edit: "Click hai lần ở đây để sửa đổi",
+                information: "Thông tin",
+                note: "Ghi chú",
+                history_time_on_site: "Thời gian trên website",
+                history_more: "Nhiều hơn",
+                history_less: "Ít hơn",
+                looking: "Đang xem",
+                history_already: "Vừa xem :",
+                to_minimize_this_chat: "Để thu nhỏ cuộc hội thoại, ấn nút thu nhỏ hoặc thoát ra ngoài cửa sổ chat",
+                cancel: "Hủy bỏ",
+                ban_visitors: "Chặn visitor",
+                reason: "Lý do",
+                also_ban_visitor_IP_adress: "Đồng thời chặn địa chỉ IP visitor",
+                visitor_offline: "Visitor đã offline",
+                no_visitor: "Bạn chưa có khách truy cập",
+                no_request_chat: "Bạn chưa có yêu cầu chat",
+                perform_test: "Xem trước tính năng chat trên ",
+                type_and_chat: "Gõ và nhấn Enter để chat",
+                signed_another_device: "Tài khoản của bạn đã được đăng nhập ở thiết bị khác, <a href=\'javascript:void(0);\' id=\'connect_trynow\'>thử lại</a>.",
+                agent_blocked: "Thông báo!  Agent của bạn tạm thời không thể truy cập vào Dashboard. Bạn vui lòng quay lại trong 10 phút nữa. Cảm ơn !",
+                f5_to_continue: "Thời gian kết nối đến Dashboard quá lâu, Nhấn Ctrl+F5 để thử lại hoặc <a href=\"http://subiz.com/help/test\" target=\"_blank\">vào đây</a> để xác định nguyên nhân.",
+                cannot_connect_socket: "Nhấn F5 để login lại. Nếu sau khi login lại bạn vẫn thấy thông báo này thì vui lòng liên hệ với chúng tôi.",
+                check_mail: "Vui lòng check mail để kích hoạt tài khoản.",
+                sure: "Bạn có thực sự muốn xóa bản ghi này?",
+                use_cus_survey: "Bạn đang chọn Auto detect ngôn ngữ. Hãy chọn một ngôn ngữ cụ thể để có thể chỉnh sửa form khảo sát.",
+                today: "Hôm nay",
+                yesterday: "Hôm qua",
+                two_day_ago: "2 Ngày trước",
+                three_day_ago: "3 Ngày trước",
+                new: "Mới",
+                return: "Quay lại",
+                find: "Tìm kiếm",
+                no_permission: "Bạn không có quyền truy cập Lịch sử này",
+                vistior_endchat: "Khách truy cập kết thúc chat",
+                system_end_chat: "Cuộc chat đã kết thúc.",
+                mes_end_chat: "kết thúc chat",
+                no_permission_chat: "Bạn không có quyền xem cuộc Chat này.<br /> Visitor đang chat với ",
+                no_permission_report: "Bạn không có quyền xem thống kê này",
+                setting_close: "Đóng",
+                setting_edit: "Sửa",
+                perm_close: "Đóng",
+                perm_edit: "Sửa",
+                firefox_denied: 'Trình duyệt của bạn đang vô hiệu tính năng hiển thị thông báo trên màn hình. <b>Tool > Page Info > Permissions</b> ở Firefox và chọn \"Allow\" trong mục \"Show Notifications”. Sau đó tải lại trang.',
+                chrome_denied: 'Trình duyệt của bạn đang vô hiệu tính năng hiển thị thông báo trên màn hình. <b>Settings > Show advanced settings > Content settings</b> ở Chrome và chọn \"Allow all sites to show desktop notifications\". Sau đó click vào nút \"Manager exceptions...\" nếu trang https://dashboard.subiz.com đang bị block bạn cần xóa dòng đó đi,tải lại trang.',
+                safari_denied: 'Trình duyệt của bạn đang vô hiệu tính năng hiển thị thông báo trên màn hình.Choose Safari > Preferences, click Notifications, và chọn  Allow hoặc Deny đối với những website mà bạn muốn thay đổi quyền hiển thị thông báo.',
+                chat_request_title: 'Subiz live chat',
+                chat_request_body: 'Bạn có một yêu cầu chat mới',
+                new_message_title: 'Subiz live chat',
+                new_message_body: 'Bạn có tin nhắn mới',
+                new_visitor_title: 'Subiz live chat',
+                new_visitor_body: 'Có khách lần đầu tiên vào website bạn',
+                return_visitor_title: 'Subiz live chat',
+                return_visitor_body: 'Có khách cũ vừa quay lại website của bạn',
+                noti_enabled: 'Thông báo màn hình đã được bật',
+                vistor_active_visitors: 'Active Visitors',
+                vistor_idle_visitors: 'Idle Visitors',
+                vistor_request_chats: 'Yêu cầu Chat',
+                history_disable: 'Chức năng đang được bảo trì, Subiz xin lỗi bạn về sự bất tiện này. Vui lòng <a href=\"http://subiz.com/contact.html\" target=\"_blank\" > liên hệ với chúng tôi </a> để được hỗ trợ lấy dữ liệu.',
+                message_limit_60_chat: 'Tài khoản của bạn đã sử dụng hết số lượng cuộc chat cho phép của gói miễn phí. Mời bạn <a href=\"http://subiz.com/landingpage/faqs/faqs.html?faq=66\" target=\"_blank\" >liên hệ với chúng tôi</a> để được hỗ trợ',
+                add_a_tag: 'Gán tag',
+                tag_setting: 'Cài đặt tag',
+                delete: 'Xóa',
+                added_this_tag_on: 'đã thêm tag này vào',
+                file_send: "Gửi",
+                file_cancel: "Hủy",
+                file_can_upload: "File được gửi",
+                file_cannot_upload: "Những file này không được hỗ trợ",
+                file_upload_failed: "Tải file có lỗi",
+                message_too_long: "Tin nhắn quá dài, vui lòng rút gọn và gửi lại.",
+                server_error: "Không thể kết nối Dashboard, vui lòng <a href=\"http://subiz.com/help/test\" target=\"_blank\"> vào đây </a> để kiểm tra nguyên nhân và liên hệ với Subiz.",
+                change_status_away: "Bạn đã chuyển trạng thái sang Away",
+                change_status_avai: "Bạn đã chuyển trạng thái sang Available",
+                day_ago: "ngày trước",
+                days_ago: "ngày trước",
+                hour_ago: "giờ trước",
+                hours_ago: "giờ trước",
+                minute_ago: "phút trước",
+                minutes_ago: "phút trước",
+                few_second_ago: "vài giây trước",
+                no_notification: "Bạn không có thông báo nào",
+                app_need_reinstall: "Ứng dụng vừa được cập nhật, bạn nên tắt và mở lại để hoàn tất việc cập nhật."
+            };
+            var canned_js = {
+                status: "Trạng thái",
+                function: "Tác vụ",
+                shortcut: "Viết tắt",
+                message: "Tin nhắn",
+                canned_responses: "Thư viện câu trả lời",
+                create_canned_responses: "Tạo câu trả lời mẫu",
+                enable: "On",
+                disable: "Off",
+                package_allows: "Package allows",
+                delete: "Xóa",
+                edit: "Sửa",
+                save_change: "Lưu thay đổi",
+                cancel: "Hủy bỏ",
+                close: "Đóng",
+                history_find_now: "Tìm kiếm ngay",
+                message_require: "Tin nhắn không được trống.",
+                export: "Xuất",
+                import: "Nhập",
+                history_file_type: "Định dạng file",
+                history_submit: "Xuất",
+                history_cancel: "Hủy bỏ",
+                upload_success: "Import thành công.",
+                upload_invalid: "Định dạng tài liệu không đúng",
+                search: "Tìm kiếm",
+                message_length: "Nội dung tin nhắn không vượt quá 250 kí tự",
+                keyword: "Từ khóa",
+                canned_not_use: "Chức năng này không có sẵn cho tài khoản của bạn. Vui lòng nâng cấp tài khoản lên gói cơ bản hoặc nâng cao để sử dụng chức năng này.",
+                share_for_agent: "Chia sẻ",
+
+            };
+            var history_js = {
+                history_export: "Xuất",
+                history_date: "Ngày",
+                history_agent: "Agent",
+                history_department: "Bộ phận",
+                history_rating: "Đánh giá",
+                history_rated_chat: "Được đánh giá",
+                history_not_rated: "Không được đánh giá",
+                history_rated_bad: "Đánh giá không tốt",
+                history_rated_good: "Đánh giá tốt",
+                history_type: "Loại",
+                history_tag: "Tag",
+                history_new_visitor: "Visitor mới",
+                history_return_visitor: "Visitor quay lại",
+                history_filter: "Lọc cuộc chat theo:",
+                history_search: "Tìm kiếm visitor",
+                history_transcript: "TRANSCRIPT",
+                history_visitor_info: "Thông tin ",
+                history_visitor_notes: "Ghi chú",
+                history_close: "Đóng",
+                history_error_date: "Vui lòng kiểm tra lại thời gian, khoảng thời gian cho phép không vượt quá 30 ngày!",
+                history_email_empty: "Email không được bỏ trống",
+                add_a_tag: 'Gán tag',
+            };
+            var agent_js = {
+                agents: "Agent",
+                department: "Bộ phận",
+                email: "Email",
+                user_name: "Tên đăng nhập",
+                member_of_department: "Nhân viên của Bộ phận",
+                last_loged: "Lần đăng nhập cuối",
+                type: "Loại",
+                last_7_days: "7 ngày vừa qua",
+                edit: "Sửa",
+                add_more_agents: "Thêm agent",
+                search_agents: "Tìm kiếm agent",
+                select_timezone: "Chọn múi giờ",
+                change_password: "Thay đổi mật khẩu",
+                change_avatar: "Thay ảnh đại diện",
+                name: "Tên",
+                password: "Mật khẩu",
+                retype_password: "Gõ lại mật khẩu",
+                job_title: "Vị trí công việc",
+                timezone: "Múi giờ",
+                dashboard_lang: "Ngôn ngữ Dashboard",
+                english: "English",
+                vietnamese: "Tiếng Việt",
+                normal: "Normal",
+                administrator: "Administrator",
+                status: "Trạng thái",
+                save_change: "Lưu thay đổi",
+                your_account_has_been: "Tài khoản của bạn đã sử dụng số lượng Agent tối đa cho phép. Xin vui lòng <a href=\"https://dashboard.subiz.com/subscription/index\" target=\"_blank\">nâng cấp tài khoản</a>!",
+                add_more_department: "Thêm Bộ phận",
+                add_department: "Thêm Bộ phận",
+                department_name: "Tên bộ phận",
+                search_depat: "Tìm kiếm Bộ phận",
+                available: "Available",
+                away: "Away",
+                offline: "Offline",
+                cancel: "Hủy bỏ",
+                avatar_max_size: "Dung lượng tối đa 200kb",
+                msg_agent_username_condition: "Tên đăng nhập chỉ bao gồm chữ thường và số, độ dài từ 6 kí tự trở lên và bắt đầu bằng chữ!",
+            };
+            var js_lang_chat_template = {
+                add_a_tag: 'Gán tag',
+            };
+            var ls_lang_webhook = {
+                webhook_description_reset_apikey: "Sử dụng API key này để xác nhận khi truy cập hệ thống API public của Subiz.",
+                webhook_descripttion: "Webhook cho phép bạn xây dựng hoặc thiết lập tích hợp để nhận những sự kiện cụ thể từ Subiz.com.",
+                webhook_reset_api: "Thiết lập lại API key  ",
+                webhook_title_delete: "Bạn chắc chắn muốn xóa webhook này?",
+                webhook_title_note_delete: "Bạn không thể quay lại ở bước này.",
+                webhook_error_url: "URL không khả dụng",
+                webhook_error_url_null: "Vui lòng điền webhook URL của bạn",
+                webhook_error_key: "Vui lòng điền Khóa bảo mật của bạn",
+                webhook_error_null: "Không có lỗi mới",
+                webhook_error_latest: "Dưới đây là thông tin về 20 lỗi mới nhất",
+                webhook_required_field: "Các trường bắt buộc",
+                webhook_name_setting: "Cài đặt webhook",
+                webhook_log_error: "Ghi lại lỗi",
+                webhook_help_link: "Trợ giúp",
+                webhook_name_event: "Sự kiện",
+                webhook_error_time: "Thời gian",
+                webhook_error_detail: "Cụ thể",
+                webhook_view_detail: "Xem chi tiết",
+                webhook_error_response: "Không có phản hồi",
+                webhook_secret_key: "Khóa bảo mật",
+                webhook_save: "Lưu",
+                webhook_edit: "Sửa",
+                webhook_delete: "Xóa",
+                webhook_learn_more: "Đọc thêm",
+                webhook_secret_key_description: "Cung cấp mã bí mật là cách tốt nhất để bảo mật dữ liệu của bạn. ",
+                webhook_version_doc: "1.0.0",
+            }
+        </script>
+
+    </head>
+    <body>
+        <div class="loadingpage">
+            <div class="loadingpagein">
+                <p>Vui lòng chờ trong giây lát ...</p>
+                <p><img alt="" src="https://dashboard.subiz.com/public//img/loadingBar.gif" style="border:0;"></p>
+            </div>
+        </div>
+        <!-- InstanceEndEditable The label “T-shirt” was created <a href="javascript:void(0);"><i class="subizdasboard iclose"></i></a> -->
+        <div style="display:none;" class="notificationLevel " id="notify_desktop">
+            <a href="javascript:void(0);"><i class="subizdasboard iclose"></i></a>
+        </div>
+        <section class="notify_reconnect" style="display:none;">
+            <div class="notifyin">
+                <div class="boxwarning">
+                    <span id="boxwarning_message"></span>
+                    <!--<i class="subizdasboard iclose boxwarning-close"></i>-->
+                </div>
+            </div>
+        </section>
+        <section id="notify" class="notify_general" style="display:none;">
+            <div class="notifyin">
+                <div class="boxwarning">
+                    <span></span>
+                    <a href="javascript:void(0);"><i class="subizdasboard iclose"></i></a>
+                </div>
+            </div>
+        </section>
+        <section class="mainloading" style="display: none">Loading... <a class="cancelloading" id="cancelloading" href="#">cancel</a></section>
+        <div class="mainloading1" style="top:0; display: block">
+            <div class="img-loading" style=""></div>
+        </div>
+        <header id="header">
+            <section id="headtop">
+                <div id="loading" style="display: none;">&nbsp;</div>
+                <a href="javascript:void(0);"><i class="subizdasboard logo"></i></a>
+                <div class="sologan"><span class="system-help">Hướng dẫn tích hợp</span> cửa sổ chat vào website của bạn.</div>
+                <div id="topright">
+                    <a href="https://dashboard.subiz.com/subscription/index" target="_blank" class="subscribe">Thuê bao dịch vụ</a>
+                    <div class="bmember">
+                        <img src="https://dashboard.subiz.com/public/img/avatar-chat.png" class="avatar" alt="">
+                        <span class="welcome reset" username="duongcuong789">Dương Khang</span>
+                        <div class="notify-head">
+                            <div class="notify-icon">
+                                <i class="fa fa-bell-o"></i>
+                                <div class="notify-number"><span class="count"></span></div>
+                            </div>
+                            <div class="notify-dropdown"><ul></ul></div>
+                        </div>
+                        <span class="iconstatus">
+                            <span>
+                                <i class="subizdasboard status" id="i-available"></i>
+                                <a class="a-available" href="javascript:void(0);">Available</a>
+                            </span>
+                            <i class="subizdasboard status" id="i-arrow"></i>
+
+                        </span>
+                        <div class="statusdropdown">
+                            <ul>
+                                <li class="i-status" id="li-available">
+                                    <a href="javascript:void(0)">
+                                        <i class="subizdasboard status" id="i-available"></i>
+                                        <a class="a-available" href="javascript:void(0);">Available</a>
+                                    </a>
+                                </li>
+                                <li class="i-status" id="li-away">
+                                    <a href="javascript:void(0)">
+                                        <i class="subizdasboard status" id="i-away"></i>
+                                        <a class="a-away" href="javascript:void(0);">Away</a>
+                                    </a>
+                                </li>
+                                <li id="show-notify-config">
+                                    <a href="javascript:void(0)">
+                                        <i class="subizdasboard status" id="i-notify"></i>
+                                        <a href="javascript:void(0)">Thông báo</a>
+                                    </a>
+                                </li>
+                                <li class="sound-config">
+                                    <a href="javascript:void(0)">
+                                        <i class="subizdasboard status" id="i-sound"></i> <a href="javascript:void(0);">Âm thanh</a>
+                                    </a>
+                                </li>
+                                <li style="display: none;" class="support-config"><i class="subizdasboard status" id="i-support"></i> <a target="_blank" href="https://dashboard.subiz.com/support.html">Support</a></li>
+                                <li class="logout">
+                                    <a href="javascript:void(0)">
+                                        <i class="subizdasboard status" id="i-logout"></i> <a id="logout_action" href="javascript:void(0);">Đăng xuất</a>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <nav id="nav">
+                <ul class="menubar">
+                    <li id="visitors_menu">
+                        <a href="javascript:void(0)" title="Visitor" class="tab  parent" ;><b><i class="iconmenu icon-visitor"></i> Visitor</b></a>
+                    </li>
+                    <li class="onchange_menu" _url="https://dashboard.subiz.com/history" _controller="history">
+                        <a href="javascript:void(0)" title="Lịch sử" class="tab parent"><b><i class="iconmenu icon-history"></i> Lịch sử</b></a>
+                    </li>
+                    <li class="onchange_menu menu_agent" _url="https://dashboard.subiz.com/agents" _controller="agents">
+                        <a href="javascript:void(0)" title="Agent" class="tab parent"><b><i class="iconmenu icon-agents"></i> Agent</b></a>
+                    </li>
+                    <li class="onchange_menu" _url="https://dashboard.subiz.com/reports.html" _controller="reports">
+                        <a href="javascript:void(0)" title="Thống kê" class="tab parent"><b><i class="iconmenu icon-reports"></i>Thống kê</b></a>
+                    </li>
+                </ul>
+                <a href="javascript:void(0);" class="settinghome onchange_menu" id="sbz_widget_setting" click_from_visitor="false" click_from_header="false" title="Setting" _url="https://dashboard.subiz.com/setting" _controller="setting"><i class="iconsetting subizdasboard"></i>Cài đặt</a>
+            </nav>
+        </header>
+        <input type="hidden" name="info_plv" id="info_plv" value='{&quot;id&quot;:68911,&quot;token_login&quot;:&quot;87aa7a465bb138889a26fcf09f2741f4&quot;,&quot;info_agent&quot;:{&quot;id&quot;:68911,&quot;id_account&quot;:53868,&quot;email&quot;:&quot;dangduongcuong@gmail.com&quot;,&quot;username&quot;:&quot;duongcuong789&quot;,&quot;name&quot;:&quot;D\u01b0\u01a1ng Khang&quot;,&quot;departments&quot;:[],&quot;language&quot;:&quot;vi&quot;,&quot;timezone&quot;:&quot;7&quot;,&quot;sound&quot;:&quot;active&quot;,&quot;type&quot;:&quot;admin&quot;,&quot;is_owner&quot;:1,&quot;hash_code&quot;:[{&quot;name&quot;:&quot;forgot_password&quot;,&quot;value&quot;:&quot;2df9da2ae3d8b67a3d3f4d5aa774a861&quot;},{&quot;name&quot;:&quot;keep_login&quot;,&quot;value&quot;:&quot;e5e7c992cb5f8bdf8fa0826bd80015f5&quot;},{&quot;name&quot;:&quot;token_login&quot;,&quot;value&quot;:&quot;87aa7a465bb138889a26fcf09f2741f4&quot;},{&quot;name&quot;:&quot;account_activate&quot;,&quot;value&quot;:&quot;5b30e15d5b0d854fc68265582d0a61a8&quot;}],&quot;notification&quot;:{&quot;chat_request&quot;:&quot;active&quot;,&quot;new_message&quot;:&quot;active&quot;,&quot;new_visitor&quot;:&quot;inactive&quot;,&quot;return_visitor&quot;:&quot;inactive&quot;,&quot;timeout&quot;:&quot;5&quot;},&quot;status&quot;:&quot;active&quot;,&quot;created&quot;:&quot;2016-11-19 09:52:00&quot;,&quot;last_login&quot;:&quot;2016-11-19 09:53:26&quot;,&quot;token&quot;:&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjo1Mzg2OCwidXNlcm5hbWUiOiJkdW9uZ2N1b25nNzg5IiwidGltZSI6IjIwMTYtMTEtMTkgMTI6MzY6MDQifQ.xAPokxmFfaE8TH4AJ1yW3p7rEfyIh8IzzrMA_igtHDI&quot;},&quot;id_account&quot;:53868,&quot;state&quot;:&quot;online&quot;}' />
+        <input type="hidden" name="admin_type" id="admin_type" value="admin" />
+        <div id="content_js"></div>
+        <link type="text/css" class="url_css_widget" rel="stylesheet" href="">
+
+        <div class="reloadpage" style="display: none">
+            <div class="reloadpagein">
+                <p>Trình duyệt bạn đang sử dụng không thể tải về một số thành phần của trang Quản lý. Vui lòng thực hiện xóa cache và mở lại!</p>
+                <p class="end"><a href="javascript:;" id="reload_btn" class="btnupgrade">Reload now!</a></p>
+            </div>
+        </div><div id="content_js_visistor">
+            <div id="body_0">
+                <article id="main">
+
+                    <div id="check_f_content" style="">
+
+                        <aside id="leftpanel">
+                            <ul class="sidebar" id="menushow">
+                                <li><a href="javascript:void(0);" id="active">Active Visitors <span class="count_active">(0)</span></a></li>
+                                <li><a href="javascript:void(0);" id="idle">Idle Visitors <span class="count_idle">(0)</span></a></li>
+                                <li><a href="javascript:void(0);" id="request_chat">Yêu cầu Chat <span class="">(0)</span></a></li>
+                            </ul>
+                            <div class="more" id="getmore" style="display:none"><a href="javascript:void(0);"><b>Nhiều hơn</b></a></div>
+                            <ul class="sidebar" id="menumore" style="display: none;"></ul>
+                            <div class="list_label" style="display:none"></div>
+                            <div class="creatlabel"><a href="javascript:void(0)" id="newlabel">Tạo nhãn mới</a></div>
+                        </aside>                <section id="rightpanel">
+                            <div class="content sub_body" id="content_1">
+                                <!-- tab 1-->
+                                <h1 class="title">Visitor</h1>
+                                <div class="box maincontent">
+                                    <div class="headerbox">
+                                        <div id="linksearch">
+                                            <div class="search-visitors_s" id="linkdropdown">Tìm kiếm visitor</div>
+                                            <div id="formsearch">
+                                                <span class="closesearch">Đóng <i class="subizdasboard iclose"></i></span>
+                                                <ul class="linesearch">
+                                                    <li>
+                                                        <input type="text" id="visitor_name" placeholder="Visitor name" class="text">
+                                                    </li>
+                                                    <li>
+                                                        <input type="text" id="visitor_email" placeholder="Visitor email" class="text">
+                                                    </li>
+                                                    <li>
+                                                        <input type="text" id="visitor_agent" placeholder="Agent" class="text">
+                                                    </li>
+                                                    <li>
+                                                        <select name="type" class="op-search" id="visitor_type">
+                                                            <option value="0">Tất cả các loại</option>
+                                                            <option value="return">Quay lại</option>
+                                                            <option value="new">Mới</option>
+                                                        </select>
+                                                    </li>
+                                                    <li>
+                                                        <label>Online nhiều hơn</label>
+                                                        <select name="online" class="op-search time" id="visitor_time">
+                                                            <option value="0">Tổng số phút</option>
+                                                            <option value="1">1 phút</option>
+                                                            <option value="2">2 phút</option>
+                                                            <option value="5">5 phút</option>
+                                                            <option value="10">10 phút</option>
+                                                        </select>
+                                                    </li>
+                                                </ul>
+                                                <div class="bottomsearch"> <span class="linksearch"><a id="search_visitor" href="javascript:void(0);">Tìm kiếm ngay <i class="subizdasboard icon-s"></i></a></span> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="tbl_visitor" width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
+                                        <thead>
+                                            <tr class="top">
+                                                <td class="clumn1">&nbsp;</td>
+                                                <td class="clumn2">Visitor</td>
+                                                <td class="clumn3">Địa điểm</td>
+                                                <td class="clumn4">Online</td>
+                                                <td class="looking">Đang xem</td>
+                                                <td class="clumn5">Loại</td>
+                                                <td class="agent">Agent</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div><!--end tab 1-->
+                        </section>
+                    </div>
+
+                </article>
+            </div>
+        </div>
+        <!-- InstanceEndEditable -->
+        <!-- open chat window -->
+        <div class="chatwindow" id="chatwindow" style="display:none;"></div>
+
+        <script type="text/javascript">
+            var arrRequestChat = [];
+            var sb_chatIdArr = [];
+            var arrIdle = [];
+            var arrActive = [];
+            var arrLabel = [];
+            var arrUnreadMsg = [];
+            var notification_not_allow = 'Subiz cần bạn cho phép để bật chức năng thông báo.';
+            var notification_not_support = 'Thông báo ngoài màn hình nền hiện tại chưa được hỗ trợ cho trình duyệt của bạn.';
+            var notification_denied = 'Thông báo bị từ chối. (Thay đổi quyền cho phép thông báo trong phần cài đặt trong trình duyệt)';
+            var GMT_client = '7';
+            var GMT_server = '0';
+            var max_agent = 100;
+        </script><footer id="footer" style="display: none;">
+            <section id="chat-compressed" class="clearfix">
+                <ul class="chat-button"></ul>
+                <div class="btn-tabmore">
+                    <div id="btnmorevisitor" class="more">More <i class="i-btn imgchatwindow"></i></div>
+                    <div class="more-visitor">
+                        <ul></ul>
+                    </div>
+                </div>
+            </section>
+        </footer>
+
+        <div class="white_content" style="display:none;" id="light-copycode">
+            <div class="tablecopy">
+                <div class="tablecopyin">
+                    <div class="titlepopup">
+                        <label>Mã nhúng</label>
+                        <a href="javascript:void(0);"><i class="subizdasboard closepopup" id="closewarning_first_login"></i></a>
+                    </div>
+                    <ul class="labelform">
+                        <li>Để cài đặt subiz, Chỉ cần chèn mã nhúng vào cuối thẻ <b>&lt;body&gt;</b> ở từng trang của website.</li>
+                    </ul>
+                    <div class="bgcode">
+                        <div class="bgpre">
+                            <div class="linkcopy"><a onclick="selectText('pre-scrollable')" id="text-to-copy" href="javascript:void(0);">Chọn mã</a></div>
+                            <pre class="pre-scrollable" id="pre-scrollable">&lt;script type='text/javascript'&gt;window._sbzq||function(e){e._sbzq=[];var t=e._sbzq;t.push(["_setAccount",53868]);var n=e.location.protocol=="https:"?"https:":"http:";var r=document.createElement("script");r.type="text/javascript";r.async=true;r.src=n+"//static.subiz.com/public/js/loader.js";var i=document.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)}(window);&lt;/script&gt</pre>
+                        </div>
+                        <span class="linklater"><a href="javascript:void(0);" id="detail_system_help">Xem chi tiết.</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="black_overlay" style="display:none;" id="fade-copycode"></div>
+        <div id="formnotify">
+            <div class="tablenotify">
+                <form id="form_noti">
+                    <div class="tablenotifyin">
+                        <div class="titlepopup">
+                            <label>Tùy chỉnh thông báo màn hình</label>
+                            <a href="#"><i class="subizdasboard closepopup"></i></a>
+                        </div>
+                        <ul class="labelform">
+                            <li id="wrn-notify" style="display:none">
+                                <div class="wrn-notify">
+                                    You disabled desktop notifications in your browser. <b>Open Tools > Page Info > Permissions</b> in Firefox and choose "Allow" in "Show Notifications" section. Then, refresh this page.
+                                </div>
+                            </li>
+                            <li id="wrn-turn-on" style="display:none">
+                                <p>Bạn cần kích hoạt thông báo trên màn hình.</p>
+                                <a href="javascript:void(0);" id="turn-on-notifi" class="btn btnsubmit"><b>Bật thông báo</b></a>
+                            </li>
+                            <li><h3>Thông báo</h3></li>
+                            <li>
+                                <input type="checkbox" name="noti_request" checked> Yêu cầu chat: (<a onclick="check_noti('chat_request')" href="javascript:void(0);">Xem thử</a>)
+                            </li>
+                            <li>
+                                <input type="checkbox" name="noti_message" checked> Tin nhắn mới (<a onclick="check_noti('new_message')" href="javascript:void(0);">Xem thử</a>)
+                            </li>
+                            <li>
+                                <input type="checkbox" name="noti_new_visitor"> Khách lần đầu truy cập vào website (<a onclick="check_noti('new_visitor')" href="javascript:void(0);">Xem thử</a>)
+                            </li>
+                            <li>
+                                <input type="checkbox" name="noti_return_visitor"> Khách cũ quay lại website (<a onclick="check_noti('return_visitor')" href="javascript:void(0);">Xem thử</a>)
+                            </li>
+                            <li>
+                                Thời gian hiển thị thông báo&nbsp;<input id="noti_timeout" type="text" name="noti_timeout" value="5" placeholder="" class="text">&nbsp giây.
+                                <span class="note">Cài đặt này chỉ có tác dụng trên Chrome (Đặt 0 sẽ hiển thị đến khi bạn tắt thông báo đi.)</span>
+                            </li>
+                            <li></li>
+                            <li class="end">
+                                <a href="#" class="btn btnsubmit" id="save_noti_config"><b>Lưu thay đổi</b></a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            var loggly_token = "b3c377fb-3681-41b8-9742-9e480bb58dc2";
+            var noti_timeout = parseInt("5", 10);
+            var ready_play_message = false;
+
+            function selectText(element) {
+                var doc = document,
+                    text = doc.getElementById(element),
+                    range,
+                    selection;
+                if (doc.body.createTextRange) { //ms
+                    range = doc.body.createTextRange();
+                    range.moveToElementText(text);
+                    range.select();
+                } else if (window.getSelection) { //all others
+                    selection = window.getSelection();
+                    range = doc.createRange();
+                    range.selectNodeContents(text);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                }
+            }
+
+            function set_ready_play_message() {
+                ready_play_message = true;
+            }
+
+            function set_ready_play_request() {
+                ready_play_request = true;
+            }
+        </script>
+        <script type="text/javascript" src="https://dashboard.subiz.com/public/js/all.2714153c8f5bb10876f42fcd14d28f9acd7d47a7.js" async="true"></script>
+        <audio id="notifyAudio_message" oncanplay="set_ready_play_message()">
+            <source src="https://dashboard.subiz.com/public/audio/alert.ogg" type="audio/ogg">
+        </audio>
+        <audio id="notifyAudio_request" oncanplay="set_ready_play_request()">
+            <source src="https://dashboard.subiz.com/public/audio/alert.ogg" type="audio/ogg">
+        </audio>
+
+    </body>
+</html>
+}*@
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">LIÊN HỆ KHÁCH HÀNG</h1>
+    </div> 
+</div>
+<div class="row">
+        <iframe frameborder="1" src="https://dashboard.subiz.com" style="height: 700px; width: 100%;">
+        </iframe> 
+    </div>
+
+    
+<style>
+    section{
+        display: none;
+    }
+</style>

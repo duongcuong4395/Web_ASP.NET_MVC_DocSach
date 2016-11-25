@@ -1,0 +1,15 @@
+﻿@if (Session["Taikhoan"] != null)
+{
+    <li><a href="@Url.Action("DShangYeuThich", "SachStore")">Sản phẩm yêu thích(@ViewBag.sl)</a></li>
+    
+    <li><a class="color4" href="#">Chào @Session["TenKhachHang"] |</a></li>
+    <li> @Html.ActionLink("Thông tin tài khoản", "ThongTinTaiKhoan", "NguoiDung") </li>
+    <li> @Html.ActionLink("Đổi mật khẩu", "chon", "NguoiDung")</li>
+    <li><a class="color4" href="@Url.Action("DangXuat", "Nguoidung")" style="color:#18C9D2">Đăng xuất</a></li>
+}
+else
+{ 
+    <li><a class="log" href="@Url.Action("chon", "NguoiDung", new {thongbao = "Chao-Mung"})"><i class="fa fa-user-circle" aria-hidden="true"></i>Dăng ký/Đăng nhập</a></li>
+    <li><a class="log" href="@Url.Action("QuenMatKhau", "NguoiDung")"><i class="fa fa-key" aria-hidden="true"></i> Quên mật khẩu</a></li>
+}
+   

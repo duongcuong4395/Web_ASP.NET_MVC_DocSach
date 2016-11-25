@@ -1,0 +1,81 @@
+﻿@using BOOKSTORE_ONLINE.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<BOOKSTORE_ONLINE.Models.donhang>
+@{
+    ViewBag.Title = "Donhang";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3><strong>Exhibition</strong></h3>
+
+<table id="racetimes">
+    <tr id="firstrow">
+        <th style="width:200px; text-align:center">
+            Ngày lập
+        </th>
+        <th style="width:200px; text-align:center">
+            Tên khách hàng
+        </th>
+        <th style="width:200px; text-align:center">
+            Hình thức giao
+        </th>
+        <th style="width:200px; text-align:center">
+            Ngày giao hàng
+        </th>
+        <th style="width:200px; text-align:center">
+            Tình trạng giao hàng
+        </th>
+        <th style="width:200px; text-align:center">
+            Họ tên người nhận
+        </th>
+        <th style="width:200px; text-align:center">
+            Địa chỉ người nhận
+        </th>
+        <th style="width:200px; text-align:center">
+            Số điện thoại người nhận
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngaylap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.khachhang.hotenkh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hinhthucthanhtoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngaygiaohang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tinhtrangthanhtoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tinhtranggiao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hotennguoinhan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diachinguoinhan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sodienthoainguoinhan)
+            </td>
+        </tr>
+    }
+
+</table>
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+                <div class="MenuTrang">
+                    @Html.PagedListPager(Model, page => Url.Action("Donhang", new { page = page }))
+                </div>
+                <style>
+                    .MenuTrang li {
+                        display: inline;
+                    }
+                </style>

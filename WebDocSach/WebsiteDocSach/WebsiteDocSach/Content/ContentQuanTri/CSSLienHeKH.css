@@ -1,0 +1,38 @@
+﻿ 
+            #LHKHBody {
+                font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+                font-size: 14px;
+                font-weight: normal;
+                color: #444;
+            }
+
+            .pKH {
+                margin: 0;
+                padding: 0;
+            }
+
+            .loadingpage {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                background-color: #FFF;
+                z-index: 99999;
+                text-align: center;
+                font-size: 14px;
+                font-weight: normal;
+                color: #444;
+            }
+
+            .loadingpagein {
+                position: fixed;
+                left: 50%;
+                margin-left: -172px;
+                top: 45%;
+                margin-top: -60px;
+            }
+
+            .loadingpage p {
+                padding: 12px 0 0 0;
+                font-weight: bold;
+                font-size: 12px;
+            } 

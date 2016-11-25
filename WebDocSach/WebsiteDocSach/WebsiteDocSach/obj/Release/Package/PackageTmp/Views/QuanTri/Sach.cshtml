@@ -1,0 +1,124 @@
+﻿@using WebsiteDocSach.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<WebsiteDocSach.Models.sach>
+
+@helper Truncate(string input, int length)
+{
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>...</text>
+    }
+}
+
+
+
+
+
+
+@{
+    ViewBag.Title = "Sach";
+    Layout = "~/Views/Layout/LayoutQuanTri.cshtml";
+}
+
+<h3><strong>Book</strong></h3>
+<p>
+    @Html.ActionLink("Thêm sách mới", "ThemSachMoi")
+</p>
+<table id="racetimes">
+    <tr id="firstrow">
+        <th style="width:200px; text-align:center">
+            Tên sách
+        </th>
+        <th style="width:200px; text-align:center">
+            Giá sách
+        </th>
+        <th style="width:200px; text-align:center">
+            Khuyến mãi
+        </th>
+        <th style="width:200px;  text-align:center">
+            Mô tả
+        </th>
+        <th style="width:200px; text-align:center">
+            Ảnh bìa
+        </th>
+        <th style="width:200px; text-align:center">
+            Ngày cập nhật
+        </th>
+        <th style="width:200px; text-align:center">
+            Nội dung
+        </th>
+        <th style="width:200px; text-align:center">
+            Link tải
+        </th>
+        <th style="width:200px; text-align:center">
+            Tên nhà xuất bản
+        </th>
+        <th style="width:200px; text-align:center">
+            Tên chủ đề
+        </th>
+        <th style="width:200px; text-align:center">
+            Giá mới
+        </th>
+        <th style="width:200px; text-align:center">
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tensach)
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.gia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.khuyenmai)
+            </td>
+            <td>
+                @Html.Raw(Truncate(item.mota, 100))
+            </td>
+            <td>
+                <img src="@Url.Content("/Images/AnhBia/" + item.anhbia)" width="150" height="300" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngaycapnhat)
+            </td>
+            <td>
+                @Html.Raw(Truncate(item.noidung, 10))
+            </td>
+            <td>
+                @Html.Raw(Truncate(item.linktai, 10))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nxb.tennxb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.chude.tenchude)
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.GiaMoi)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa sách", "SuaSach", new { id = item.idsach }) |
+                @Html.ActionLink("Chi tiết sách", "ChiTietSach", new { id = item.idsach }) |
+                @Html.ActionLink("Xóa sách", "XoaSach", new { id = item.idsach })
+            </td>
+        </tr>
+    }
+
+</table>
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+                <div class="MenuTrang">
+                    @Html.PagedListPager(Model, page => Url.Action("Sach", new { page = page }))
+                </div>
+                <style>
+                    .MenuTrang li {
+                        display: inline;
+                    }
+                </style>

@@ -1,0 +1,64 @@
+﻿@using BOOKSTORE_ONLINE.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<BOOKSTORE_ONLINE.Models.tacgia>
+@*@helper Truncate(string input, int length)
+{
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>...</text>
+    }
+}*@
+@{
+    ViewBag.Title = "Tacgia";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3><strong>Author</strong></h3>
+
+<p>
+    @Html.ActionLink("Create New", "Taomoitg")
+</p>
+<table id="racetimes">
+    <tr id="firstrow">
+        <th style="width:200px; text-align:center">
+            Tên tác giả
+        </th>
+        <th style="width:200px; text-align:center">
+            Tiểu sử
+        </th>
+        <th style="width:200px; text-align:center">
+            
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.hotentg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tieusu)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Suatg", new { id = item.idtacgia }) |
+                @Html.ActionLink("Details", "Chitiettg", new { id = item.idtacgia }) |
+                @Html.ActionLink("Delete", "Xoatg", new { id = item.idtacgia })
+            </td>
+        </tr>
+    }
+
+</table>
+             Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+            <div class="MenuTrang">
+                @Html.PagedListPager(Model, page => Url.Action("Tacgia", new { page = page }))
+            </div>
+            <style>
+                .MenuTrang li {
+                    display: inline;
+                }
+            </style>

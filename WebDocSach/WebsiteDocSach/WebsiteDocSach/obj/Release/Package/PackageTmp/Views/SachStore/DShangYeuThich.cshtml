@@ -1,0 +1,82 @@
+﻿@using WebsiteDocSach.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<sach>
+
+
+
+@{
+    ViewBag.Title = "Sách được khách hàng thích.";
+    Layout = "~/Views/Layout/LayoutNguoiDung.cshtml";
+}
+
+<div class="row"> 
+    <h2 style="text-align:center; color: red;">Danh sách sản phẩm yêu thích</h2>
+    <h2 class="title text-center">@ViewBag.ThongBao</h2>
+    <br />
+    @{
+        int dem = 0;
+    }
+    @foreach (var item in Model)
+    {
+        dem++;
+        <div class="col-md-3 col-sm-6">
+            <div class="products">
+                
+                    @if (item.GiaMoi == 0)
+                    {
+                        <div class="offer">
+                            <p>FREE</p>
+                        </div>
+                    }
+                    else if (item.khuyenmai != "0" || item.khuyenmai != null)
+                    {
+                        <div class="offer">
+                            <p>- @item.khuyenmai %</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div></div>
+                    }
+                <div class="thumbnail">
+                    <a href="@Url.Action("XemChiTiet", "Sach", new { id = item.idsach })">
+                        <img src="~/Images/AnhBia/@item.anhbia" alt="@item.tensach" style="height: 180px; width: 100px">
+                    </a>
+                </div>
+                <div class="productname">@item.tensach</div>
+                <h4 class="price">Giá gốc: @String.Format("{0:0,0}", item.gia) VND </h4>
+                <div class="button_group">
+                     
+                    <div>
+                        <a class="button compare" href="@Url.Action("ThemGioHang", "GioHang", new { @sidsach = @item.idsach, @strURL = Request.Url.ToString() })">
+                            THÊM VÀO GIỎ
+                        </a>
+                    </div>
+                    <br />
+                    <div class="clearfix"></div>
+                    <div>
+                        <a class="button wishlist" href="@Url.Action("XoaSPYeuThich", "SachStore", new { idsach = @item.idsach, @strURL = Request.Url.ToString() })">
+                            <img src="~/Images/Icon/pierced-heart_1874253.jpg" class="img-responsive" style="height:50px; width:50px;" />
+                            Xóa yêu thích
+                        </a> 
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        if (dem == 4)
+        {
+            <div class="clearfix"></div>
+            dem = 0;
+        }
+    }
+    <div class="clearfix"></div>
+    @*Tạo liên kết các trang*@
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) Trong tổng số @Model.PageCount Trang;
+    @*<div class="MenuTrang">
+
+        </div>*@
+    <div class="pager">
+        @Html.PagedListPager(Model, page => Url.Action("Index", "SachStore", new { page = page }))
+    </div>
+</div>

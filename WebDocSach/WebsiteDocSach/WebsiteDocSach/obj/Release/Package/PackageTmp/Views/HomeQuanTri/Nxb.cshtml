@@ -1,0 +1,46 @@
+﻿@using BOOKSTORE_ONLINE.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<BOOKSTORE_ONLINE.Models.nxb>
+@{
+    ViewBag.Title = "Nxb";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3><strong>Publishing company</strong></h3>
+
+<p>
+    @Html.ActionLink("Create New", "Taomoinxb")
+</p>
+<table id="racetimes">
+    <tr id="firstrow">
+        <th style="width:200px; text-align:center">
+            Tên nhà xuất bản
+        </th>
+        <th style="width:200px; text-align:center">
+            
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tennxb)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Suanxb", new { id = item.idnxb }) |
+                @Html.ActionLink("Delete", "Xoanxb", new { id = item.idnxb })
+            </td>
+        </tr>
+    }
+
+</table>
+             Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+            <div class="MenuTrang">
+                @Html.PagedListPager(Model, page => Url.Action("Nxb", new { page = page }))
+            </div>
+            <style>
+                .MenuTrang li {
+                    display: inline;
+                }
+            </style>
